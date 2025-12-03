@@ -8,7 +8,7 @@ Each day's puzzle is in its own directory with language-specific implementations
 
 ```
 day01/          - Day 1: Secret Entrance
-day02/          - Day 2: TBD
+day02/          - Day 2: Gift Shop
 ...
 ```
 
