@@ -31,11 +31,11 @@ Expected output: `3` fresh ingredients
 
 Run with:
 ```
-python day05/solution.py day05/example.txt
-python day05/solution.py day05/input.txt
+python day05/cafeteria.py day05/example.txt
+python day05/cafeteria.py day05/input.txt
 ```
 
 Run tests:
 ```
-python -m pytest day05/test_solution.py -v
+python -m pytest day05/test_cafeteria.py -v
 ```

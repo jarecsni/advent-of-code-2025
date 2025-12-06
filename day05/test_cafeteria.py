@@ -4,7 +4,7 @@ Tests for Day 5: Cafeteria
 """
 
 import unittest
-from solution import parse_input, is_fresh, solve_part_one, solve_part_two, merge_ranges
+from cafeteria import parse_input, is_fresh, solve_part_one, solve_part_two, merge_ranges
 
 
 class TestParseInput(unittest.TestCase):

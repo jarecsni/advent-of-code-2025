@@ -4,6 +4,23 @@ inclusion: always
 
 # Advent of Code Project Standards
 
+## Workflow for New Day Solutions
+
+### Phase 1: Setup and Discussion
+When receiving a new day's problem:
+1. Create the day folder structure
+2. Update the master README with the new day
+3. Create the day's README with the problem description
+4. Create placeholder files (example.txt, input.txt, solution.py, test_solution.py)
+5. **STOP and discuss the problem with Cooper before implementing**
+   - Analyse the problem structure
+   - Discuss potential approaches
+   - Consider edge cases and complexity
+   - Agree on the solution strategy
+
+### Phase 2: Implementation
+After discussing and agreeing on the approach, proceed with implementation.
+
 ## When Creating New Day Solutions
 
 Every new day solution MUST include:

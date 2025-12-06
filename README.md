@@ -12,6 +12,7 @@ day02/          - Day 2: Gift Shop - Identify invalid product IDs with repeating
 day03/          - Day 3: Lobby - Maximise battery joltage by selecting optimal digit combinations
 day04/          - Day 4: Printing Department - Count and iteratively remove accessible paper rolls
 day05/          - Day 5: Cafeteria - Check ingredient freshness using ID ranges
+day06/          - Day 6: Trash Compactor - Solve cephalopod math worksheets with vertical problems
 ...
 ```
 
