@@ -104,88 +104,119 @@ def solve_part1(filename, num_edges=1000):
     return sizes[0] * sizes[1] * sizes[2]
 
 
+def solve_part2(filename):
+    """
+    Connect junction boxes until all are in one circuit. Return the product
+    of the X coordinates of the last two boxes connected.
+    
+    Args:
+        filename: Input file with junction box coordinates
+    
+    Returns:
+        Product of X coordinates of last connection
+    """
+    boxes = parse_input(filename)
+    n = len(boxes)
+    
+    # Generate all edges with distances
+    edges = []
+    for i, j in combinations(range(n), 2):
+        dist = calculate_distance(boxes[i], boxes[j])
+        edges.append((dist, i, j))
+    
+    # Sort by distance
+    edges.sort()
+    
+    # Process edges until we have one circuit
+    uf = UnionFind(n)
+    uf.num_components = n  # Track number of components
+    last_connection = None
+    
+    for dist, i, j in edges:
+        if uf.union(i, j):
+            last_connection = (i, j)
+            uf.num_components -= 1
+            
+            # Stop when all boxes are in one circuit
+            if uf.num_components == 1:
+                break
+    
+    # Get X coordinates and multiply
+    box_i, box_j = last_connection
+    x1 = boxes[box_i][0]
+    x2 = boxes[box_j][0]
+    return x1 * x2
+
+
+def _generate_sorted_edges(boxes):
+    """Helper to generate and sort all edges."""
+    edges = []
+    for i, j in combinations(range(len(boxes)), 2):
+        dist = calculate_distance(boxes[i], boxes[j])
+        edges.append((dist, i, j))
+    edges.sort()
+    return edges
+
+
 if __name__ == "__main__":
     import sys
     
     if len(sys.argv) < 2:
-        print("Usage: python playground.py <input_file> [num_edges] [-d|--debug]")
+        print("Usage: python playground.py <input_file> [num_edges] [-d|--debug] [--part2]")
         print("Example: python playground.py example.txt 10")
         print("Example: python playground.py input.txt 1000 --debug")
+        print("Example: python playground.py input.txt --part2")
         sys.exit(1)
     
     filename = sys.argv[1]
     debug = "-d" in sys.argv or "--debug" in sys.argv
-    
-    # Parse num_edges (skip debug flags)
+    part2 = "--part2" in sys.argv
     num_edges = 1000
     for arg in sys.argv[2:]:
-        if arg not in ["-d", "--debug"]:
+        if arg not in ["-d", "--debug", "--part2"]:
             num_edges = int(arg)
             break
     
     try:
         boxes = parse_input(filename)
         n = len(boxes)
+        edges = _generate_sorted_edges(boxes)
         
-        if debug:
-            print(f"Parsed {n} boxes")
-            print(f"First 3 boxes: {boxes[:3]}")
-            print()
-        
-        # Generate and sort edges
-        if debug:
-            print("Generating all possible edges...")
-        edges = []
-        for i, j in combinations(range(n), 2):
-            dist = calculate_distance(boxes[i], boxes[j])
-            edges.append((dist, i, j))
-        
-        if debug:
-            print(f"Generated {len(edges)} edges")
-            print(f"Sorting edges by distance...")
-        edges.sort()
-        
-        if debug:
-            print(f"Shortest 5 edges:")
-            for idx in range(min(5, len(edges))):
-                dist, i, j = edges[idx]
-                print(f"  {idx+1}. Distance {dist:.2f}: box{i} <-> box{j}")
-            print()
-        
-        # Process edges
-        if debug:
-            print(f"Processing first {num_edges} edges...")
-        uf = UnionFind(n)
-        connections_made = 0
-        skipped = 0
-        
-        for edge_idx in range(min(num_edges, len(edges))):
-            dist, i, j = edges[edge_idx]
-            if uf.union(i, j):
-                connections_made += 1
-                if debug and edge_idx < 10:
-                    print(f"  Edge {edge_idx+1}: Connected box{i} <-> box{j} (dist {dist:.2f})")
-            else:
-                skipped += 1
-                if debug and edge_idx < 10:
-                    print(f"  Edge {edge_idx+1}: Skipped box{i} <-> box{j} (already connected)")
-        
-        if debug:
-            print(f"\nConnections made: {connections_made}")
-            print(f"Edges skipped: {skipped}")
-            print()
-        
-        # Get sizes and result
-        sizes = uf.get_component_sizes()
-        result = sizes[0] * sizes[1] * sizes[2]
-        
-        print(f"Total boxes: {n}")
-        print(f"Edges processed: {min(num_edges, len(edges))}")
-        print(f"Circuits remaining: {len(sizes)}")
-        print(f"Three largest circuits: {sizes[0]}, {sizes[1]}, {sizes[2]}")
-        if debug and len(sizes) > 3:
-            print(f"All circuit sizes: {sizes}")
-        print(f"\nResult: {sizes[0]} × {sizes[1]} × {sizes[2]} = {result}")
+        if part2:
+            # Part 2: Connect until one circuit
+            uf = UnionFind(n)
+            num_components = n
+            last_connection = None
+            
+            for edge_idx, (dist, i, j) in enumerate(edges):
+                if uf.union(i, j):
+                    last_connection = (i, j, dist)
+                    num_components -= 1
+                    if num_components == 1:
+                        break
+            
+            box_i, box_j, dist = last_connection
+            x1, x2 = boxes[box_i][0], boxes[box_j][0]
+            result = x1 * x2
+            
+            print(f"Last connection: box{box_i} {boxes[box_i]} <-> box{box_j} {boxes[box_j]}")
+            print(f"X coordinates: {x1}, {x2}")
+            print(f"Result: {x1} × {x2} = {result}")
+        else:
+            # Part 1: Process fixed number of edges
+            uf = UnionFind(n)
+            for edge_idx in range(min(num_edges, len(edges))):
+                _, i, j = edges[edge_idx]
+                uf.union(i, j)
+            
+            sizes = uf.get_component_sizes()
+            result = sizes[0] * sizes[1] * sizes[2]
+            
+            print(f"Total boxes: {n}")
+            print(f"Circuits remaining: {len(sizes)}")
+            print(f"Three largest: {sizes[0]}, {sizes[1]}, {sizes[2]}")
+            print(f"Result: {sizes[0]} × {sizes[1]} × {sizes[2]} = {result}")
+            
     except FileNotFoundError:
         print(f"Error: {filename} not found")
         sys.exit(1)
