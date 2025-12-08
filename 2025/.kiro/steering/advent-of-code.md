@@ -29,14 +29,31 @@ Every new day solution MUST include:
 - Add the new day to the structure section in `README.md`
 - Include a brief one-line description of the puzzle
 
-### 2. CLI Interface with argparse
-- Use `argparse` for command-line argument parsing
+### 2. CLI Interface with sys.argv or argparse
+- **Simple scripts:** Use `sys.argv` for straightforward input file + optional parameters
+- **Complex scripts:** Use `argparse` for multiple flags and options
 - Accept `input_file` as a positional argument
-- Include `-d/--debug` flag for verbose output
-- Add any puzzle-specific flags (e.g., `--twelve` for part two variations)
-- Follow the pattern from day03/lobby.py
+- Include optional parameters for puzzle-specific values (e.g., num_edges, iterations)
+- Provide clear usage message when arguments are missing
 
-Example structure:
+Simple example (sys.argv):
+```
+if __name__ == "__main__":
+    import sys
+    
+    if len(sys.argv) < 2:
+        print("Usage: python solution.py <input_file> [optional_param]")
+        print("Example: python solution.py example.txt 10")
+        sys.exit(1)
+    
+    filename = sys.argv[1]
+    param = int(sys.argv[2]) if len(sys.argv) > 2 else 1000
+    
+    result = solve(filename, param)
+    print(f"Result: {result}")
+```
+
+Complex example (argparse):
 ```
 def main():
     parser = argparse.ArgumentParser(description="Day X: Title - Description")
@@ -71,10 +88,16 @@ Each day directory should contain:
 
 ## Running Solutions
 
-Solutions should be runnable as:
+Solutions should be runnable with input file as argument:
+```
+python dayXX/<solution>.py example.txt
+python dayXX/<solution>.py input.txt
+python dayXX/<solution>.py example.txt 10  # with optional parameter
+```
+
+Or from parent directory:
 ```
 python dayXX/<solution>.py dayXX/example.txt
-python dayXX/<solution>.py dayXX/input.txt -d
 ```
 
 Tests should be runnable as:
