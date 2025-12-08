@@ -13,6 +13,7 @@ day03/          - Day 3: Lobby - Maximise battery joltage by selecting optimal d
 day04/          - Day 4: Printing Department - Count and iteratively remove accessible paper rolls
 day05/          - Day 5: Cafeteria - Check ingredient freshness using ID ranges
 day06/          - Day 6: Trash Compactor - Solve cephalopod math worksheets with vertical problems
+day07/          - Day 7: Laboratories - Simulate tachyon beam splitting through manifold
 ...
 ```
 
