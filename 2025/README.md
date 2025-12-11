@@ -17,6 +17,7 @@ day07/          - Day 7: Laboratories - Simulate tachyon beam splitting through 
 day08/          - Day 8: Playground - Connect junction boxes using minimum spanning tree algorithm
 day09/          - Day 9: Movie Theater - Find largest rectangle between red tiles
 day10/          - Day 10: Factory - Configure indicator lights using minimum button presses
+day11/          - Day 11: Reactor - Find all paths through electrical device network
 ...
 ```
 

@@ -1,0 +1,101 @@
+"""
+Day 11: Reactor - Find all paths through electrical devices
+"""
+import argparse
+
+def parse_input(filename):
+    """Parse device connections into a directed graph."""
+    graph = {}
+    
+    with open(filename, 'r') as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith('#'):
+                continue
+                
+            if ': ' not in line:
+                continue
+                
+            device, outputs = line.split(': ')
+            connections = outputs.split()
+            graph[device] = connections
+    
+    return graph
+
+def find_all_paths(graph, start, end, path=None, debug=False):
+    """Find all paths from start to end using DFS."""
+    if path is None:
+        path = []
+    
+    path = path + [start]
+    
+    if debug:
+        print(f"  Exploring: {' -> '.join(path)}")
+    
+    # If we reached the end, return this path
+    if start == end:
+        if debug:
+            print(f"  Found path: {' -> '.join(path)}")
+        return [path]
+    
+    # If this device has no outputs, dead end
+    if start not in graph:
+        if debug:
+            print(f"  Dead end at {start}")
+        return []
+    
+    paths = []
+    for next_device in graph[start]:
+        # Avoid cycles by not revisiting nodes in current path
+        if next_device not in path:
+            new_paths = find_all_paths(graph, next_device, end, path, debug)
+            paths.extend(new_paths)
+        elif debug:
+            print(f"  Skipping {next_device} (already in path)")
+    
+    return paths
+
+def part1(data, debug=False):
+    """Solve part 1: count all paths from 'you' to 'out'."""
+    if debug:
+        print("Graph structure:")
+        for device, outputs in data.items():
+            print(f"  {device}: {outputs}")
+        print()
+    
+    paths = find_all_paths(data, 'you', 'out', debug=debug)
+    
+    if debug or len(paths) <= 20:  # Show paths if debugging or reasonable number
+        print(f"Found {len(paths)} paths from 'you' to 'out':")
+        for i, path in enumerate(paths, 1):
+            print(f"  Path {i}: {' -> '.join(path)}")
+    else:
+        print(f"Found {len(paths)} paths from 'you' to 'out' (too many to display)")
+    
+    return len(paths)
+
+def part2(data, debug=False):
+    """Solve part 2: placeholder for when part 2 is revealed."""
+    print("Part 2 not yet available")
+    return 0
+
+def main():
+    parser = argparse.ArgumentParser(description="Day 11: Reactor - Find all paths through electrical device network")
+    parser.add_argument("input_file", help="Path to input file")
+    parser.add_argument("part", type=int, nargs="?", default=1, 
+                        choices=[1, 2], help="Puzzle part (1 or 2, default: 1)")
+    parser.add_argument("-d", "--debug", action="store_true", 
+                        help="Print debug information")
+    args = parser.parse_args()
+    
+    data = parse_input(args.input_file)
+    
+    if args.part == 1:
+        result = part1(data, debug=args.debug)
+        print(f"Part 1: {result}")
+    else:
+        result = part2(data, debug=args.debug)
+        print(f"Part 2: {result}")
+
+if __name__ == "__main__":
+    main()
