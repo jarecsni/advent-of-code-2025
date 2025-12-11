@@ -1,0 +1,2896 @@
+-❄️- 2025 Day 10 Solutions -❄️-
+
+THE USUAL REMINDERS
+
+All of our rules, FAQs, resources, etc. are in our community wiki.
+If you see content in the subreddit or megathreads that violates one of our rules, either inform the user (politely and gently!) or use the report button on the post/comment and the mods will take care of it.
+AoC Community Fun 2025: Red(dit) One
+
+Submissions megathread is unlocked!
+7 DAYS remaining until the submissions deadline on December 17 at 18:00 EST!
+Featured Subreddits: r/programminghorror and r/holdmybeer HoldMyEggnog
+
+"25,000 imported Italian twinkle lights!"
+— Clark Griswold, National Lampoon's Christmas Vacation (1989)
+Today is all about Upping the Ante in a nutshell! tl;dr: go full jurassic_park_scientists.meme!
+
+💡 Up Your Own Ante by making your solution:
+
+The absolute best code you've ever seen in your life
+Alternatively: the absolute worst code you've ever seen in your life
+Bigger (or smaller), faster, better!
+💡 Solve today's puzzle with:
+
+Cheap, underpowered, totally-not-right-for-the-job, etc. hardware, programming language, etc.
+An abacus, slide rule, pen and paper, long division, etc.
+An esolang of your choice
+Fancy but completely unnecessary buzzwords like quines, polyglots, reticulating splines, multi-threaded concurrency, etc.
+The most over-engineered and/or ridiculously preposterous way
+💡 Your main program writes another program that solves the puzzle
+
+💡 Don’t use any hard-coded numbers at all
+
+Need a number? I hope you remember your trigonometric identities…
+Alternatively, any numbers you use in your code must only increment from the previous number
+Request from the mods: When you include an entry alongside your solution, please label it with [Red(dit) One] so we can find it easily!
+--- Day 10: Factory ---
+
+Post your code solution in this megathread.
+
+Read the full posting rules in our community wiki before you post!
+State which language(s) your solution uses with [LANGUAGE: xyz]
+Format code blocks using the four-spaces Markdown syntax!
+Quick link to Topaz's paste if you need it for longer code blocks. What is Topaz's paste tool?
+Read more
+20
+·
+293
+Comments Section
+brainsig
+•
+3m ago
+[LANGUAGE: Picat]
+
+As Picat comes with batteries included (SAT solver, CP solver, etc) it was easy to model:
+https://github.com/cgrozea/AdventOfCode2025-Picat/blob/main/day10/part2.pi
+1
+u/Avuvos2 avatar
+Avuvos2
+•
+11m ago
+[LANGUAGE: Python]
+
+Part 1: BFS on binary states with xor to transition between them.
+
+Part 2: Notice Ax=b pattern with minimize x constraint - class LP problem in integers, solved with scipy.
+
+https://github.com/Avuvos/advent-of-code-2025/blob/main/day10/main.py
+1
+RussellDash332
+•
+20m ago
+[LANGUAGE: Python]
+
+Same thing golfed, into a single line of code.
+1
+u/SunMatrix64 avatar
+SunMatrix64
+•
+2h ago
+[LANGUAGE: C++]
+GitHub
+
+Only got through part 1.
+My basic concept was pressing all the buttons each round by XOR them with the values from the previous round and return how many rounds it took to get to the goal. Takes ~5.5-6ms.
+1
+cicadanator
+•
+2h ago
+[LANGUAGE: Javascript - Node JS]
+
+Part 1 was solved using a breadth first search. The main optimization for this was converting the buttons and indicator lights into binary strings and then parsing them to numbers. This allowed the use of the XOR operator which makes finding the all of the next states after each press much faster. Another optimization was to track all previously seen states so work was not done multiple times. This was very fast to give an answer for part 1.
+
+Part 2 was much more difficult. I attempted similar types of BFS and binary math operations to find a result. However, the number of presses required made this impossible. I came looking for hints on here and saw that Z3 was mentioned. So I went that route to create an optimization equation that would give me the correct result. It's not as fast as other solutions from this year but everything runs in about 4 seconds. Overall not too bad.
+
+https://github.com/BigBear0812/AdventOfCode/blob/master/2025/Day10.js
+1
+u/onrustigescheikundig avatar
+onrustigescheikundig
+•
+2h ago
+[LANGUAGE: Scheme (Chez)]
+
+gitlab
+
+Part 1: 19 ms; Part 2: 204 ms
+
+Blah blah XORing buttons blah blah matrix math I think by now a lot of people are aware by now that Part 2 reduces to an integer linear programming problem that can't be (quickly) brute forced. A lot of people solved Part 2 with a library like Z3 or Scipy. Chez doesn't have those kinds of libraries at least that I could easily find. So, given the choice between using a different language (boo) or writing my own constraint solver (hiss), I instead wrote my own damn Z3 bindings and used "learning how to call C libraries from Chez" as a flimsy justification for violating my rule about not using external libraries. Seeing as I am not familiar with Z3 and resent today's problem specifically for having to learn, I picked a solution from the megathread (u/KindComrade) and translated it. The most difficult part was trying to figure out how the high-level C# calls mapped onto the C API, as the C# bindings add a healthy amount of shim code.
+
+I will say, hacking away on C libraries at the repl is a unique experience...
+1
+u/SoulsTogether_ avatar
+SoulsTogether_
+•
+3h ago
+[LANGUAGE: C++]
+
+https://github.com/SoulsTogetherX/Adventofcode_2025/tree/main/Day10
+
+I completed Part 1 quickly. A simple recursion function using xor property.
+
+And, as I expected, I starting falling off. I spent over 12 hours on part 2 and have not completed it. ...at least, not with c++. I'll probably use python for it now, then try to fix it with C++ later. If I manage to finish it before the timelimit imposed on this post, I'll update my comment.
+
+For now, I'll focus on the next problem.
+2
+u/Expensive-Type2132 avatar
+Expensive-Type2132
+•
+3h ago
+[LANGUAGE: AArch64]
+
+paste
+
+I'm tired boss.
+
+3.57ms combined
+
+Let me know if you have a faster solution for a comparable target (Apple M1 Max 23H626). My goal is to write the fastest possible solution for my device.
+1
+u/CoffeeBreakInc avatar
+CoffeeBreakInc
+•
+3h ago
+[LANGUAGE: TS]
+
+https://github.com/nicolas-sabbatini/advent-of-code/tree/master/2025/day_10
+
+Just part a, I couldn't do part b, sad
+2
+u/Valuable_Leopard_799 avatar
+Valuable_Leopard_799
+•
+4h ago
+[LANGUAGE: Common Lisp]
+
+I usually don't post but it seems I'm the only CL survivor today so here is my solution (well, mine and the library author's): paste
+
+It just emits Z3 code and then calls it, I threw it together quickly so it's utter goulash. Part 1 was also solved this way, my run this year is using all the libraries I can. I saw that part 1 was just SAT but used Z3 anyway, in the end I had to change a few lines to parse numbers instead of bools but that was it.
+
+3
+u/dijotal avatar
+dijotal
+•
+3h ago
+Sorry to leave you hanging :-p
+
+I've got Part 1 -- no problem, BFS with newly learned lisp bitwise operations -- but I'm looking at Part 2 and I can't see anything but linear algebra and thinking "Ugh... I just don't wanna."
+
+It may be my first dropped star this round :-/
+
+Carry the flag!
+1
+u/hrunt avatar
+hrunt
+•
+4h ago
+[LANGUAGE: Python]
+
+code
+
+Part 1 was straightforward using a bitmap. I thought for Part 2 I could do something similar, but after thinking about it for a bit, I realized it was a system of under-determined linear equations. Which is great, except a) I keep myself limited to the standard Python library and b) I have no idea how to write linear equation solvers.
+
+To heat the house, I implemented a heapq-based solution that processes buttons in bulk. For example, if the lowest joltage needed in a set is 20, then I find all the combinations ways to make 20 presses from the buttons that hit that voltage. I can process N presses at once just by multiplying a button bitmap by N, and since I process the joltages in order from smallest to lowest, I never have to worry about exceeding any other joltages. Once a joltage level is reached on one wire, some of the buttons can't be used anymore, so it trims options down for future wires.
+
+It's still not efficient, but it's surprisingly "quick" for a close-to-brute-force solution. Most of them processed very quickly. There are a few edge cases that take a few hours, though. I'm through 184 of the 199 machines I have.
+
+In the meantime, I'm learning how Gaussian elimination works to implement a solver that finishes in a decent amount of time.
+3
+u/_rabbitfarm_ avatar
+_rabbitfarm_
+•
+4h ago
+[Language: Prolog]
+
+Both parts in Prolog. I make use of GNU Prolog's clp(fd) solver.
+
+Part 1: https://adamcrussell.livejournal.com/66354.html
+
+Part 2: https://adamcrussell.livejournal.com/66810.html
+2
+dkdkfiennwls
+•
+5h ago
+[LANGUAGE: Python, Mathematica]
+
+Part 1: Quick and dirty BFS with a set in Python. Nodes are integers, and edge transitions are XOR. Using set comprehension. paste
+
+  s = set([0])
+  while target not in s:
+    s = { a^b for a in s for b in buttons }
+    total_presses += 1
+Part 2: Generated some Mathematica with Minimize, for the first test input looks like this:
+  Minimize[{ x0+x1+x2+x3+x4+x5,
+             x4+x5==3 && x1+x5==5 && x2+x3+x4==4 && x0+x1+x3==7 },
+           {x0, x1, x2, x3, x4, x5}, NonNegativeIntegers]
+1
+u/fdpierson avatar
+fdpierson
+•
+5h ago
+[LANGUAGE: python] I could not for the life of me figure out how to solve 10b. Reduced row-echelon form was getting me nowhere and leading to degenerate stuff like negative and fractional numbers of button presses. I made AI throw a giant heap of math known as OR-TOOLS for Python to force the problem into submission. Now that I have some completely incomprehensible AI-generated solution, how in the world do I actually understand it? I want to know the math required to do such a thing intelligently.
+
+1
+u/AutoModerator avatar
+AutoModerator
+MOD
+•
+5h ago
+AutoModerator did not detect the required [LANGUAGE: xyz] string literal at the beginning of your solution submission.
+
+Please edit your comment to state your programming language.
+
+I am a bot, and this action was performed automatically. Please contact the moderators of this subreddit if you have any questions or concerns.
+1
+u/python-b5 avatar
+python-b5
+•
+5h ago
+[LANGUAGE: Lily]
+
+Whew, this was difficult... I came very close to throwing in the towel. I'm not the strongest with linear algebra, so part 2 took me a lot of Googling and looking at examples of Gaussian elimination. I eventually arrived at a solution that runs in just over a second on my machine, which I'm happy enough with. I ended up with a lot more code than I'd prefer for an Advent of Code problem, but maybe that's just the way it has to be with today's puzzle.
+
+https://github.com/python-b5/advent-of-code-2025/blob/main/day_10.lily
+
+1
+u/AutoModerator avatar
+AutoModerator
+MOD
+•
+5h ago
+AutoModerator did not detect the required [LANGUAGE: xyz] string literal at the beginning of your solution submission.
+
+Please edit your comment to state your programming language.
+
+I am a bot, and this action was performed automatically. Please contact the moderators of this subreddit if you have any questions or concerns.
+1
+u/Gabba333 avatar
+Gabba333
+•
+5h ago
+[LANGUAGE: C#]
+
+Part 2 I realised it was a set of linear equations, cue much messing around looking for a good .NET package that would give parameterized solutions. Failing to find a suitable one that I eventually set to hand-rolling a matrix decomposition routine for integers.
+
+Once I had that I could see the input lines seemed fairly well constrained so I tried brute forcing the free variables by back substituting and DFS on any that were not yet determined.
+
+I then wasted a huge amount of time as I had got confused about what the maximum a given button press could be and I wasn't finding solutions for some of the lines. Cue much wasted time debugging the decomposition and back substitution code before considering one failing input with negative entries in the decomposed matrix and realising the issue. Once I replaced that section a simple global bound based on the max that a particular button can be pressed before overflowing one of the joltages and I had a correct p2 answer!
+
+Runs in about 5s or so, I am sure there are some better bounding and other optimisations to make but I am pretty burnt out!
+
+github
+1
+Petrovjan
+•
+7h ago
+[LANGUAGE: Python]
+
+Yes, I was using PuLP for the first time, and no, I didn't know how to use it properly :D
+
+Topaz
+1
+u/RookBe avatar
+RookBe
+•
+7h ago
+[LANGUAGE: Rust]
+
+Rust that compiles to WASM (used in a solver on my website)
+Bonus link at the top of the code to a blogpost about today explaining the problem, and my code.
+1
+sanraith
+•
+7h ago
+[LANGUAGE: C++]
+
+Source is available on my github: Day10.h
+For part 2 I tried reducing the search space by finding the minimum and maximum times I need to press the current button, but I still just recursively iterate over this range for each button. This explodes the search space for a few larger machines, so my solution at the time of writing takes 15 minutes to complete.
+1
+u/Smylers avatar
+Smylers
+•
+7h ago
+[LANGUAGE: Vim keystrokes] After a couple of days off, I was pleased to see that today's task is solvable in Vim. Ant-friendly version — load your input and type:
+
+:%s/ {.*⟨Enter⟩:se nows⟨Enter⟩{qaqqa/\d⟨Enter⟩2⟨Ctrl+A⟩w@aq@a
+:%s/\./o/g|%s/#/O/g|%s/\d\+/&|\~/g|%s/,//g⟨Enter⟩{qbo⟨Esc⟩kO1⟨Esc⟩qqcqqc
+:+,/^$/s/\v(^(.*\]).*)@<=( \S+)(.*)@=/\r\2\3:\4/g⟨Enter⟩:g/\]$/d⟨Enter⟩
+:g/:/norm yi)@0⟨Enter⟩:sil!g/\C\[o*\]/?^\d?+,/^$/d⟨Enter⟩:%s/ \S\+:⟨Enter⟩
+?^\d⟨Enter⟩⟨Ctrl+A⟩@cq@c:,$norm@b@c⟨Enter⟩@s
+Humans may prefer the solution split across more lines, with comments.
+
+The key to this is replacing each button wiring schematic with a sequence of Vim keystrokes that do the toggling. The only Vim command I can think of that toggles a single character is ~, which toggles case. So instead of . and #, represent the indicator lights with o and O. And the first light is in Vim column 2, so add 2 to each of the light-position numbers. So after transforming the input, the first line from the sample becomes:
+
+[oOOo] (5|~) (3|~5|~) (4|~) (4|~5|~) (2|~4|~) (2|~3|~)
+We can activate the first button with yi)@0 — that is, yank the text inside the next parens; that ends up in register "0. Then run the contents of that register as a keyboard macro with @0: 5| goes to column 5 and ~ toggles the o there to O.
+
+@b sets things up to process one machine: putting a blank line after it and 1 as a counter on the line above it. The @c loop processes that machine, by trying each of the buttons first. The long :s/// command with backslashed numbers in it converts the above line into multiple lines, each different possibile button to try first:
+
+[oOOo] (5|~): (3|~5|~) (4|~) (4|~5|~) (2|~4|~) (2|~3|~)
+[oOOo] (3|~5|~): (4|~) (4|~5|~) (2|~4|~) (2|~3|~)
+[oOOo] (4|~): (4|~5|~) (2|~4|~) (2|~3|~)
+[oOOo] (4|~5|~): (2|~4|~) (2|~3|~)
+[oOOo] (2|~4|~): (2|~3|~)
+[oOOo] (2|~3|~):
+In case none of those first buttons work, after the colon is the list of buttons to try after that. It's never necessary to try a button more than once, and it's never necessary to try a button to the left of the one just tried (because BA has the same effect as AB), so the list of options gets shorter as we move along the buttons.
+
+The macro presses the first button on each of those rows (the rows in the file that have a colon in them). If any of those made all the lights go off then we've found the button sequence (because the same sequence that just turned all the lights off also works in reverse). The lights will be [oooo], which is matched by the case-sensitive pattern /\C\[o*\]/, triggering the command that deletes all this machine's possibilities. That's guarded with :silent! so that if we haven't got an all-off row of lights, the macro continues.
+
+Next it removes the just-pressed button from each row, then goes up and increases the number at the top (the initial 1) by 1, and loops round again: each of the remaining (partial) lists of buttons for the current machine is expanded to multiple possibilities, which all have their first button pressed and their lights checked.
+
+When some all-off lights are discovered, deleting the rows for that machine means that the following :%s/ \S\+: command (to remove the just-pressed button from each row) fails, because there are no lines left with colons in them. That causes an error, which makes the @c loop end. And the number on the line above is the number of button presses that were needed to do that.
+
+Repeat for lines 2 onwards, then sum the numbers for the part 1 answer. Sum the individual machines' button counts with the @s macro defined on Day 5 in my solution for part 2. (I knew it would come in handy!)
+
+8
+u/daggerdragon avatar
+daggerdragon
+MOD
+•
+7h ago
+*fish fish fish* This one better stay put 😒
+
+Leaving this second bug report here for ease of finding it later: Round 2 Electric Boogaloo
+2
+u/gehenna0451 avatar
+gehenna0451
+•
+7h ago
+[LANGUAGE: Python]
+
+https://gist.github.com/sybil-0/aee1b3c6499eee405290cadc6c12a757
+
+For Part 1 I stuck with itertools, just try larger permutations until one works, for part 2 like most people i used a solver, pulp in this case.
+1
+u/Probable_Foreigner avatar
+Probable_Foreigner
+•
+8h ago
+[LANGUAGE: C#]
+
+https://github.com/AugsEU/AdventOfCode2025/blob/master/Day10/SwitchBoard.cs
+
+Did both parts with DFS, no external libraries. For part 1 the only optimisation was to stop searching a branch if we had already found a lower number of button presses.
+
+For part 2 I had to do some very basic constraint solving. It's still DFS but at each level of the search we find all variables which are forced to be a certain value, because all other values in that column have been set to a definite value. Basically I'm only solving the equations in 1 variable. That was enough to solve the whole thing in 30 minutes of runtime. Maybe could get it down to 10ish if I did multithreading.
+1
+u/Stano95 avatar
+Stano95
+•
+8h ago
+[LANGUAGE: Haskell]
+
+Please note I've only managed part 1 for today :(
+
+Code is on github.
+
+benchmark (excluding parser) 39.0 ms ± 2.1 ms
+
+for part 1
+
+parse the input (obviously lol) and model the buttons as a type Button = Set Int, and the light as a type LightMap = Map Int LightState where LightState = On | Off
+write some transition functions that model pressing a button so something like LightMap -> Button -> LightMap
+then a function that represent pressing many buttons so LightMap -> [Button] -> LightMap
+I also made 2 observations about the problem
+the buttons can be pressed in any order and the result will be the same
+pressing a button twice is the same as never pressing it
+therefore I only need to consider pressing each button at most once
+if we have n buttons then that's 2 ^ n combos (we either press each button or we don't)
+this is basically just the power set
+since we care about how to get to the desired light state with the fewest presses we want a way of generating the powerset where we generate all the singletons first, then all the pairs, then all the triples etc
+and once we have a way of doing this we can just model pressing all the buttons for each element of the power set of buttons and then the first one that takes the light to the desired state wine
+this actually found the answer fairly quickly, I think it's because my powerset is generated lazily (thank you Haskell) and all the button combos are relatively small
+As for part 2
+I didn't solve it
+but I think it's basically just linear algebra
+or I could maybe try using something crazy like Lagrange multipliers
+the problem is basically minimise something (sum of button presses) subject to something (can formulate equations linking number of button presses to joltage)
+but this feels like overkill for sure
+there will surely be a really nice solution to part 2 in this thread!
+
+1
+u/AustinVelonaut avatar
+AustinVelonaut
+•
+7h ago
+I noticed the same thing about part 1, and used a powerSet as well, although I didn't know of a way to generate it smallest-first, so I just ended up sorting it by length. I'll have to take a look at your implementation to see how to guarantee smallest-first.
+1
+
+1 more reply
+icub3d
+•
+9h ago
+[LANGUAGE: Rust]
+
+Definitely a tough day for me. I used a BFS for p1 that solved it relatively fast. I spend so much time on p2 that I basically forgot about p1, so it could definitely use some TLC later. For p2 I tried the BFS and couldn't even solve the first one, so I knew I needed to so something else. I tried a DFS that was solving but very slowly for the actual input, like one machine per 10 minutes or something. So I got a hint about using linear algebra and then that make the solution click for me. I still had to fix a bunch of bugs to get it working but it now solves much faster. I basically find all the "free" variables and then I can DFS over those values for valid solutions and keep the minimum.
+
+Solution: https://gist.github.com/icub3d/16eea2a8b4a94d193a148fef908779a9
+
+Video: https://youtu.be/xibCHVRF6oI
+4
+Markavian
+•
+9h ago
+[LANGUAGE: JavaScript]
+
+https://github.com/johnbeech/advent-of-code-2025/blob/main/solutions/day10/solution.js
+
+Solved part 1 with a hypercube breadth-first-search, where every button press is an edge. This took a depressingly long amount of time to debug, so I fiddled around with colourful outputs to try and make it feel more rewarding.
+
+https://github.com/johnbeech/advent-of-code-2025/blob/main/solutions/day10/output-p1-input.txt
+Part 2... realising we were beyond hypercubes at this point... I ended up spending the day not using a lpsolver library... and making my own helper (with tests)... which is super fast and I'm super happy... and I'm super~ Whyyy.
+
+https://github.com/johnbeech/advent-of-code-2025/blob/main/solutions/day10/lpsolver.js
+https://github.com/johnbeech/advent-of-code-2025/blob/main/solutions/day10/output-p2-input.txt
+And because apparently I was trying to make things self-contained... I built a tiny describe/it harness with ANSI-coloured pass/fail output to exercise the solver (equality, symmetry, inequalities, integrality, infeasible cases). Who needs mocha. Or jest. Or vitest anyway.
+
+All I could think of all day was "I need to bake the best cake. I need to bake the best cake... I need to bake the best cake..."
+
+Please. end me.
+1
+u/mendelmunkis avatar
+mendelmunkis
+•
+9h ago
+[LANGUAGE: C]
+
+Pt 2 is the first time I had to go to an external library
+
+For pt 1 the key is that no button could require more than one press. Pt 2 I used GLPK maybe some day I will come back and and implement the Gaussian Elimination/brute force solution
+
+3.14 ms/5.60 ms
+1
+u/Dependent-Birthday29 avatar
+Dependent-Birthday29
+•
+9h ago
+[Language: OCaml]
+
+Quickly thought of a solution to part 2 since I had already vectorized everything - but tried not using an external library.
+
+Ended up solving quickly with Lp/Lp_glpk
+
+solution
+1
+jinschoi
+•
+9h ago
+[Language: Rust, Python]
+
+Part 1 was fun. Parsed the buttons and target lights into u16s. I reversed the lights order to make it easier to generate the buttons. Itertools' powerset() makes it easy just to try all possible button combinations, and the lights which stay on are just the XOR of all the buttons pressed:
+
+use std::str::FromStr;
+use itertools::Itertools;
+#[derive(Debug)]
+struct Machine {
+    lights: u16,
+    buttons: Vec<u16>,
+}
+impl FromStr for Machine {
+    type Err = ();
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        let segs = s.split_ascii_whitespace().collect::<Vec<_>>();
+        let lights = segs[0]
+            .trim_matches(&['[', ']'])
+            .bytes()
+            .rev()
+            .fold(0, |acc, b| acc << 1 | (b == b'#') as u16);
+        let buttons = segs[1..segs.len() - 1]
+            .iter()
+            .map(|&s| {
+                s.trim_matches(&['(', ')'])
+                    .split(',')
+                    .map(|s| s.parse::<u8>().unwrap())
+                    .fold(0u16, |acc, n| acc ^ (1 << n))
+            })
+            .collect::<Vec<_>>();
+        Ok(Self { lights, buttons })
+    }
+}
+fn fewest_buttons(m: &Machine) -> usize {
+    m.buttons.iter().powerset()
+        .filter_map(|pressed| {
+            let on = pressed.iter().fold(0, |acc, &n| acc ^ n);
+            if on == m.lights {
+                Some(pressed.len())
+            } else {
+                None
+            }
+        })
+        .min()
+        .unwrap()
+}
+fn main() {
+    let res = include_str!("../../input.txt")
+        .lines()
+        .map(|line| fewest_buttons(&line.parse::<Machine>().unwrap()))
+        .sum::<usize>();
+    println!("{res}");
+}
+Tried to solve part 2 with A*, but it just wasn't working. Had to bust out the Z3. I thought I had some code for a simplex solver lying around, but I can't find it.
+
+paste
+
+1
+LRunner10
+•
+8h ago
+Where did you learn Z3 or what documentation did you reference. All I could find was: https://z3prover.github.io/api/html/classz3py_1_1_optimize.html
+1
+
+1 more reply
+ u/siddfinch avatar
+siddfinch
+•
+9h ago
+[Language: Free Pascal] Day 10: Factory
+
+Part 1: Linear algebra over GF(2). Build a coefficient matrix, Gaussian elimination, and enumerate free variable combinations for minimum Hamming weight.
+
+Part 2: Initially tried iterative deepening and BFS, both too slow. Final solution uses Gaussian elimination over reals to identify free variables (typically 1-4), then bounded exhaustive search. Most machines have small bounds (~50-70 per variable), making enumeration tractable.
+
+https://codeberg.org/siddfinch/aoc2025/src/branch/trunk/src/day10
+
+The jump from binary toggles to unbounded integer counters turned out to be the jump from polynomial to NP-hard. Classic AoC!
+
+Note: No additional libraries, standard Free Pascal.
+
+2
+u/daggerdragon avatar
+daggerdragon
+MOD
+•
+9h ago
+FYI: AutoModerator triggered because you prepended your language tag with octothorpes. Next time just start with the language tag and no Markdown, no prefixes, nothing else.
+
+(Are you expecting your symbols to be Markdown? If so, they didn't work because the fancypants editor needs to be switched to Markdown mode first.)
+1
+u/AutoModerator avatar
+AutoModerator
+MOD
+•
+9h ago
+AutoModerator did not detect the required [LANGUAGE: xyz] string literal at the beginning of your solution submission.
+
+Please edit your comment to state your programming language.
+
+I am a bot, and this action was performed automatically. Please contact the moderators of this subreddit if you have any questions or concerns.
+1
+u/emef avatar
+emef
+•
+9h ago
+[Language: zig]
+
+https://github.com/emef/aoc/blob/main/aoc-2025/src/solutions/d10.zig
+
+Couple of fun things this time:
+
+Part 1: I've been trying to do as many of these without any dynamic allocation so I wrote a generic circular queue using a buffer. However I did end up reaching for a hash map to maintain the list of seen permutations when doing BFS.
+
+Part 2: I thought it may be possible to extend the part 1 approach with a clever priority queue to minimize presses but converge quickly. That didn't work so I stepped back from the brute force approach and modeled as a linear programming problem. This gave me the chance to play around w/ linking z3 and writing a zig wrapper of the c api for the actual solver.
+
+It's kind of a bummer to use 3rd party libs but I'm not sure what the alternative solution would be unless you implement your own solver. Curious to see if anyone came up with a dependency-free solution.
+
+1
+u/Probable_Foreigner avatar
+Probable_Foreigner
+•
+8h ago
+Curious to see if anyone came up with a dependency-free solution.
+You can just about get away with DFS if at each step you solve only the equations in a single variable. E.g. say once you do a bit of searching you have say you have set 3 coefficients definitively, those 3 could mean one of the columns in your equation has only a single unknown and you can solve that easily without needing any gaussian elimination.
+1
+u/Sensitive_Session644 avatar
+Sensitive_Session644
+•
+9h ago
+[LANGUAGE: Python]
+
+https://colab.research.google.com/drive/1uakXSAQ8vbJ11Uh_5xtmF_QifiO1iNI7
+
+I used the CP-SAT Solver from OR-Tools for both parts.
+
+1
+u/nullmove avatar
+nullmove
+•
+8h ago
+It matters little but fwiw the GLOP linear programming backend might be much faster for part 2.
+1
+xr51z
+•
+9h ago
+[Language: Ruby]
+
+LINK (part 1 only)
+
+I am not a programmer, just a 30s-something guy who decide to learn coding earlier this year, and today I am defeated for the first time this AoC.
+
+Part 1 went really well, I had the solution after about 20 minutes. However, I've been chewing on part 2 for hours now and I've decided to give up. I wanted to write my own algorithm (lol) but failed, then investigated this (to me unbeknownst) Z3 thing everyone's talking about, but decided to call it a day. You win, elves!
+
+3
+u/ChupeDeJaiba avatar
+ChupeDeJaiba
+•
+8h ago
+I loled at the puts "Part 2: ", "ERROR: brain too small"
+
+A few suggestions from a fellow ruby enthusiast (?)
+
+Since only the min amount of button presses is needed, I think that changing buttons.length.downto(1) to 1.upto(buttons.length) will allow you to exit as soon as a sequence reaches the end state instead of going trough all combinations. Something like Enumerable#find
+
+To avoid being #hacky you can use Float::INFINITY as an initial minpresses value
+
+Look into String#scan and some REGEX for input parsing, is pretty useful for AoC
+1
+u/daggerdragon avatar
+daggerdragon
+MOD
+•
+9h ago
+I am not a programmer, just a 30s-something guy who decide to learn coding earlier this year, and today I am defeated for the first time this AoC.
+Wow, you did VERY well for being a newbie coder! Congratulations on making it this far!
+
+Consider not giving up just yet... Advent of Code and this subreddit are open year-round, so you don't have to solve part 2 right now. You can come back later! And if you're still stuck, there's always the option of creating a Help/Question post with your code in order to get some ideas ;)
+3
+
+1 more reply
+lluque8
+•
+9h ago
+[Language: Scala]
+
+First went down with BFS. For 2nd I had a home-brewn solution that took like 10 minutes to complete but got me the second star still. Can not live with tests running that long so took a peek at what other people were doing. New concept for me these ILP solutions. Nevertheless, gave a go at Google's OR-tools and they did get the job done nicely.
+
+github
+
+Have to say that I'm not a big fan of these kind of puzzles. Luckily I had a dentist's appointment in between. Even that felt like a well deserved break.
+1
+u/mvorber avatar
+mvorber
+•
+10h ago
+[Language: F#]
+https://github.com/vorber/AOC2025/blob/main/day10.fs
+
+Tried bfs for part1 and it went surprisingly well.
+For part2 it seemed that ILP/Simplex/etc were the only viable options, but I've already implemented simplex myself twice in this life, and made a promise to never do it again :P So I found https://github.com/fslaborg/flips/tree/main which seemed promising, and after an hour or so reading their docs and examples got my answer.
+Runs in about 120ms for part1 and 250ms for part2 on my 5+yo desktop.
+
+As a bonus - finally got to use amazing FParsec (https://github.com/stephan-tolksdorf/fparsec) this year :)
+1
+kimamor
+•
+10h ago
+[Language: python]
+It took more time than I anticipated.
+
+Part 1 is trivial.
+Part 2 is Gaussian elimination (I learned what it is called only after coding it) + recursive search on free variables. Still takes some time to find the answer.
+
+* part1: https://github.com/romamik/aoc2025/blob/master/day10/day10p1.py
+* part2: https://github.com/romamik/aoc2025/blob/master/day10/day10p2.py
+1
+u/AustinVelonaut avatar
+AustinVelonaut
+•
+10h ago
+[LANGUAGE: Admiran]
+
+For part1, since the button pushes are an XOR operation that is its own inverse, we only need to check all combinations of 0 or 1 uses of the buttons (i.e. the powerSet). I generated the powerSet, sorted on length, then used find to find the first one that resulted in the indicator pattern. I also used my parser combinators library for the first time, this year, to easily parse the input.
+
+https://github.com/taolson/advent-of-code/blob/master/2025/admiran/day10.am
+1
+
+[deleted]
+•
+10h ago
+u/badcop_ avatar
+badcop_
+•
+10h ago
+[LANGUAGE: bash]
+
+took like 12 hours but i did it i beat part 2 in bash i don't regret it at all
+
+no solvers used, just gaussian elimination
+part 1: https://github.com/cgsdev0/advent-of-code/blob/main/2025/day10/p1.sh
+part 2: https://github.com/cgsdev0/advent-of-code/blob/main/2025/day10/p2.sh
+
+2
+RussellDash332
+•
+6h ago
+Gaussian!? I thought that might still give you some implicit equations. Do you brute force from there using Diophantine or something?
+1
+u/danvk avatar
+danvk
+•
+10h ago
+[Language: Haskell]
+
+Part 1: https://github.com/danvk/aoc2025/blob/f0dfb01e2478901411d4b5b3d2bf554596e4a2e3/y2025d10/Main.hs
+
+Part 2: https://github.com/danvk/aoc2025/blob/main/y2025d10/Main.hs
+
+Wow, this was a tough one! But I'm happy to have solved it without pulling in a fancy linear programming library. Just pure Haskell.
+
+Part 1 is pretty straightforward with a BFS. I thought for a bit about how to represent the "wiring diagrams" In Haskell (List? Vector?) before realizing it would be better to use an Int as a bitvector. Then "push a button" is just xor.
+For Part 2 that doesn't work at all because the state space blows up way to fast.
+Instead, you can treat it as a system of equations where the variables are the number of times you press each button and the equations are matching the joltages.
+These equations all look like
+
+ 7 = A +     C
+ 5 =             D + E
+12 = A + B +     D + E
+ 7 = A + B +         E
+ 2 = A +     C +     E
+i.e. every variable has a coefficient of 0 or 1
+
+Some of these systems are overconstrained (but they are satisfiable!) and some are underconstrained.
+
+I wasn't super excited about building a linear algebra library in Haskell. So my kludgey solution was to pick the equation with the fewest variables and try every possibility there (i.e. all A, C, E that add to 2), plugging those values into the remaining equations.
+
+That solution works but its runtime is highly sensitive to the number of variables, and it's too slow.
+
+So to speed it up I added to the system of equations all pairs Eq1 - Eq2, where the subtraction keeps it in the right form, i.e. Eq2 has a subset of the variables in Eq1. That speeds it up a lot and gets me the solution in ~2 minutes.
+1
+u/lunar_mycroft avatar
+lunar_mycroft
+•
+10h ago
+[LANGUAGE: Rust]
+
+This one gave me a lot of trouble.
+
+Full code. Part 1 is a brute force search over bit masked buttons and lights. As others have pointed out, since it's XOR each button will be pressed zero or one times, not more. This keeps the search space fairly small, and I could have saved a ton of time by realizing that I didn't need a more clever solution. As for part 2... this was the first one this year I had to resort to spoilers on. Clearly I need to study linear programming a lot more, as I had ~zero knowledge of it going in. I ended up using u/RussellDash332's solution as adapted by u/Ok-Bus4754, and further modified by me to suit my style~/further oxidize it. On my machine, parsing takes ~110µs, part 1 takes ~500µs, and part 2 takes 2.2ms (I doubt the performance difference there is due to my modifications).
+
+[edit: forgot to directly link part 2]
+2
+KindComrade
+•
+10h ago
+[Language: C#]
+
+Part 1: XOR + BFS
+Part 2: Z3
+
+Code - github
+2
+HaskellLisp_green
+•
+10h ago
+[Language: Python]
+
+Part 2: I used pulp. I've seen someone mentioned Z3, but there is suitable library that can be applied to solution of second part.
+
+https://github.com/dfwdfq/advent-of-code-2025/blob/master/task10/task10_2.py
+
+Executed in 786.48 millis.
+
+0
+u/daggerdragon avatar
+daggerdragon
+MOD
+•
+10h ago
+Do not share your puzzle input which also means do not commit puzzle inputs to your repo without a .gitignore or the like. Do not share the puzzle text either.
+
+I see full plaintext puzzle inputs in your public repo e.g.:
+
+https://github.com/dfwdfq/advent-of-code-2025/blob/master/task1/input2
+Please remove (or .gitignore) all puzzle text and puzzle input files from your entire repo and scrub them from your commit history. This means from all prior years too!
+2
+
+1 more reply
+timvisee
+•
+10h ago
+[LANGUAGE: Rust]
+
+Short and fast.
+
+- Part 1 in 718 μs (0.718 ms)
+- Part 2 in 12.80 ms
+- Day 1 to 10 in 18.24 ms (parallel in 14.20 ms)
+
+Used a linear algebra solver for part 2. Others seem to do the same.
+0
+u/jad2192 avatar
+jad2192
+•
+11h ago
+[LANGUAGE: Python]
+
+I treated part 1 as a graph problem and used Djikstra (inefficiently with a list instead of heap), I thought part2 was going to involve using the joltages as a weight somehow but boy was I wrong... I tried to not cheat and solve pt 2 using DFS, and a dynamic approach but both were untenable so I finally relented and used scipy as I knew it was an integer linear program.
+
+GitHub
+1
+u/Far_Sweet_6070 avatar
+Far_Sweet_6070
+•
+11h ago
+[LANGUAGE: Ajla]
+
+https://www.ajla-lang.cz/downloads/examples/advent-2025/10.ajla
+
+https://www.ajla-lang.cz/downloads/examples/advent-2025/10-2.ajla
+
+(part 2 uses Z3)
+0
+u/Totherex avatar
+Totherex
+•
+11h ago
+[LANGUAGE: C#]
+
+https://github.com/rtrinh3/AdventOfCode/blob/f62b27fbfb275346d132833fde36d9e1b8caaaf6/Aoc2025/Day10.cs
+
+Part 1 is a breadth-first search. I represent the lights and the buttons as bitmasks, so I can update the lights by XORing them with a button.
+
+For Part 2, I learned Z3! The linear algebra library I used in 2023, Math.NET Numerics, didn't seem to be of much help for these underdetermined systems. Z3's C# API is pretty verbose, we essentially have to build ASTs with methods like MkInt, MkAdd and MkEq. The Python demos show that they know about operator overloading, grumble grumble...
+1
+u/hextree avatar
+hextree
+•
+11h ago
+[LANGUAGE: Python]
+
+Code
+
+Video
+
+Z3 strikes again
+1
+u/jwezorek avatar
+jwezorek
+•
+11h ago
+[LANGUAGE: C++23]
+
+Part 1: I used a breadth-first search over the state space, representing the states as integers and the buttons as binary masks to XOR against. BFS works fine here because the state space is small. None of the states have more than 10 binary digits, so the max search space is only 2^10, (1024).
+
+Part 2: I initially tried to reuse the BFS approach, adding pruning when any current joltage exceeded the target (since joltage only goes up). It quickly became clear this would be vastly too slow. I recognized it as an Integer linear programming problem immediately but tried the brute force way first, assuming AoC usually avoids requiring heavy solvers. In this case, though, I don't think it can be done in reasonable time without a solver (or basically implementing one yourself, like simplex or branch-and-bound.
+
+So I used Cbc. Honestly, the hardest part was configuring the build system to link against it. Even with vcpkg, it was a pain. But once I got it building, the logic was straightforward: you set up a matrix where the rows are the counters and the columns are the buttons (filled with ones and zeros). Then you just tell the solver to minimize the total sum and force the press counts to be integers.
+
+Actually rereading the problem text, it is pretty clear that using solvers was expected. The sentence "You have to push each button an integer number of times; there's no such thing as '0.5 presses' (nor can you push a button a negative number of times)" is a weird thing to state so it can be read as a kind of clue that an IP solver is what you need.
+
+[github link]
+1
+TiCoinCoin
+•
+11h ago
+[Language: Python]
+
+Part 2 literally took me the whole day: day 10
+
+I (relatively) quickly found the systems of equations. I already used sympy for day 24, 2023. But I want to use only standard libraries, so I tried to implement a solver.
+
+It's inefficient (it runs in 20minutes), but it works! Plus, I got to use itertools, and I discovered Fraction. I'm happy with my messy solution :) (I plan to improve it at some point, maybe even build some helper - but not today !)
+2
+u/Derailed_Dash avatar
+Derailed_Dash
+•
+12h ago
+[LANGUAGE: Python]
+
+Solution walkthrough is here.
+Code is here.
+My AoC repo. Please add a star!
+No Z3 here!
+
+For Part 1, I realized that:
+
+Each button need only be pressed once, because pressing it again simply reverts the state.
+The real input has a max of around 13 buttons, and therefore max of 2**13 (8192) button combinations per machine.
+This is tiny, so we can brute force all combinations.
+I simply create all combinations of button presses, starting with 0 buttons, 1 button, 2 buttons, up to k buttons, where k is all the buttons.
+For each combination, calculate the result of pressing those buttons, using XOR. (Because I represent each button as a bit mask.)
+If the result matches the target state, return the number of button presses, i.e. k.
+Part 2 was tricky! It was obviously a linear algebra problem, so I started by trying to use SymPy to solve simultaneous equations. (I've used this in previous years.) But I soon realised this wasn't going to work, so I did some research into Integer Linear Programming and concluded SciPy was the droid I was looking for.
+
+In my walkthrough I've captured this thought journey, as well as the solution itself.
+2
+RubenSmits
+•
+12h ago
+[Language: Kotlin] Part 2
+
+Really tough day as finding the brute-force dfs solution already took some time, then made countless amounts of performance improvements but it was only fast enough to solve about the easy half of the input
+Then felt very temped to look in this sub or ask AI but I managed on my own :)
+Realised the problem could be reduced to a linear algebra system, I forgot 99% of my knowledge of a linear algebra class I took 10 years ago so spend hours on youtube/wikipedia to understand how to solve it.
+
+Then found choco-solver which did the trick, but it was very difficult to figure out how the library exactly worked
+
+Took me around 10 hours to solve but very happy I made it!
+3
+jhandros
+•
+12h ago
+[Language: Python in Excel]
+#Part1
+from scipy.optimize import linprog
+from collections import deque
+tasks=[(
+    {i for i,x in enumerate(t[1:-1]) if x=="#"},
+    [set(map(int,b[1:-1].split(","))) for b in bs],
+    tuple(map(int,c[1:-1].split(",")))
+) for t,*bs,c in (l.split() for l in xl("A1:A179")[0])]
+def solve1(g,m):
+    q,seen=deque([(set(),0)]),{frozenset()}
+    while q:
+        s,d=q.popleft()
+        if s==g:return d
+        for x in m:
+            ns=s^x
+            f=frozenset(ns)
+            if f not in seen:
+                seen.add(f); q.append((ns,d+1))
+sum(solve1(g,m) for g,m,_ in tasks)
+
+#Part2
+solve2=lambda g,m:linprog([1]*len(m),A_eq=[[i in x for x in m]for i in range(len(g))],b_eq=g,integrality=True).fun
+sum(solve2(c,m)for _,m,c in tasks)
+1
+Adz_23
+•
+12h ago
+[LANGUAGE: Java]
+
+Part 1 Brute Force, Part 2 used the library https://www.ojalgo.org/
+
+Solution: https://github.com/Adz-ai/AdventOfCode2025/blob/main/src/main/java/aoc/day10/Day10.java
+
+Execution Time: 174 ms
+1
+TotalPerspective
+•
+12h ago
+[Language: mojo]
+
+solution
+
+The wall has been hit on part 2. I know what it is I don't know... I just need a few days to re-learn the math. I have a solution in place but it's not going to find the answer during my lifetime.
+2
+mothibault
+•
+12h ago
+[LANGUAGE: Python]
+Learning Python, day 10
+TIL why Python is popular for data science.
+0
+edrumm10
+•
+12h ago
+[LANGUAGE: Python]
+
+No time for part 2 today but would've probably used scipy.linalg to solve it. Like a few others, I XOR'd everything as bits for part 1
+
+Part 1: https://github.com/edrumm/advent-of-code-2025/blob/master/day10/day10_pt1.py
+
+Part 2:
+1
+u/Brief-Presentation-4 avatar
+Brief-Presentation-4
+•
+13h ago
+[LANGUAGE: C#]
+
+github used Z3
+0
+u/sebastianotronto avatar
+sebastianotronto
+•
+13h ago
+[LANGUAGE: Python]
+
+Part 2: Home-cooked linear algebra, no external libraries. I just solve the linear system doing row-reduction, back substitution and keeping track of the bounds for the free parameters (which are at most 4). There are more comments in the code, I am happy to answer your questions if you have any :)
+
+EDIT: forgot to mention, it runs in a couple of seconds on my (not very powerful) laptop.
+
+6
+u/daggerdragon avatar
+daggerdragon
+MOD
+•
+10h ago
+Do not share your puzzle input which also means do not commit puzzle inputs to your repo without a .gitignore or the like. Do not share the puzzle text either.
+
+I see full plaintext puzzle inputs in your public repo e.g.:
+
+https://git.tronto.net/aoc/file/2022/03/input.html
+Please remove (or .gitignore) all puzzle text and puzzle input files from your entire repo and scrub them from your commit history. This means from all prior years too! edit: 👍
+3
+
+1 more reply
+[deleted]
+•
+10h ago
+yes. home cooked
+1
+u/taylorott avatar
+taylorott
+•
+13h ago
+[LANGUAGE: Python]
+
+For part 2 I ended up implementing my own row/column reduction algorithm. Specifically, it converts linear system A*X = B, to the form A1*X1+A2*X2 = B_simple, by simultaneously:
+
+Isolating the linearly independent rows of A (and discarding the remaining rows), which corresponds to removing any redundant equations in the linear system. (corresponding elements of B are discarded to form B simple)
+Splitting columns of A into a matrix of linearly independent columns (A1), and the remaining columns (A2). A1 is thus an invertible matrix, meaning that X1 = (A1^-1)(B_simple-A2*X2), meaning that we now only need to search of the space of X2 values, speeding up the system.
+full code
+
+4
+u/daggerdragon avatar
+daggerdragon
+MOD
+•
+10h ago
+Top-level comments in Solution Megathreads are for code solutions.
+
+This write-up can stay, but please also include your full code/repo/solution.
+1
+MizardX
+•
+13h ago
+[LANGUAGE: Rust]
+
+Github
+
+Part 1: 5.1385 ms 1.3524 ms
+Part 2: 17.446 ms
+
+Part 1 brute force. I gave up on part 2 for now, and used a linear programming library.
+
+Edit 1: Optimize part 1 by first checking if current configuration could decrease the result.
+1
+u/The_Cers avatar
+The_Cers
+•
+14h ago
+[LANGUAGE: Python]
+I thought this looked like a linear optimization problem. So i spun up pulp and thought it would crush the 190 problems easily. It ran for ~6 minutes for part 1 since modeling the parity constraints is a bit ugly. Having done all this work however, part 2 completed in 3 seconds. Just plug in the joltage requirements instead of the parity constraints and off you go.
+
+https://github.com/cedrikewers/AdventOfCode/blob/main/2025/Day10/day10.ipynb
+1
+u/willkill07 avatar
+willkill07
+•
+14h ago
+[LANGUAGE: CUDA C++] [Red(dit) One]
+
+EDIT: we are fast now! I changed the ILP solver to use shared memory along with warp-level operations to get a 90x speedup improvement. Part 2 now consistently runs in under 1ms on my GPU
+
+I have committed coding crimes. No external libraries. Just CUDA and C++.
+
+https://github.com/willkill07/AdventOfCode2025/blob/main/day10.cpp
+
+Wrote a naive ILP solver that runs on a single GPU thread for each machine. Part 1 actually does a parallel BFS on the GPU and runs in a reasonable amount of time (13us). Still though, 80ms for Part 2 doesn't make me too upset.
+2
+ap29600
+•
+14h ago
+[LANGUAGE: K+z3]
+
+shelled out to an SMT solver for this one...
+x:0:"10.txt"
+(lights;buttons;joltage):+{("#"=*:;`I$","\';`I$","\*:)@'(0 1,-1+#x)_(-1_1_)'x:" "\x}'x
+buttons:@[;;:;1]/:'[&'#'lights;buttons]
+
+z3solve:{
+ "/tmp/z3instance" 0: x
+ res:."\\z3 -in < /tmp/z3instance"
+ (s;m):+0N 2#res
+ :[~&/s~\:"sat"; `err"unsat: ",x@*&~s~\:"sat"; ]
+ +/`I$-2_'4_'m}
+
+z3solve@{
+  inst:,"(push)"
+  inst,:{,/("(declare-const p";$x;" Bool)")}'!#y
+  inst,:,,/("(declare-const m Int)\n(assert (= m (+ ";" "/"(ite p",/:($!#y),\:" 1 0)";")))")
+  inst,:{,/("(assert (xor ";" "/(,"false";,"true")[~x],"p",'$y;"))")}'[x;&'+y]
+  inst,:,"(minimize m)"
+  inst,:,"(check-sat)"
+  inst,:,"(get-value (m))"
+  inst,:,"(pop)"
+  "\n"/inst}'[lights;buttons]
+
+z3solve@{
+  inst:,"(push)"
+  inst,:{,/("(declare-const p";$x;" Int)\n(assert (<= 0 p";$x;"))")}'!#y
+  inst,:,,/("(declare-const m Int)\n(assert (= m (+ ";" "/"p",'$!#y;")))")
+  inst,:{,/("(assert (= ";$x;" (+ "; " "/"p",'$y;")))")}'[x;&'+y]
+  inst,:,"(minimize m)"
+  inst,:,"(check-sat)"
+  inst,:,"(get-value (m))"
+  inst,:,"(pop)"
+  "\n"/inst}'[joltage;buttons]
+2
+u/maneatingape avatar
+maneatingape
+•
+14h ago
+[LANGUAGE: Rust]
+
+Solution (part one only)
+
+As others have noted, in part one the buttons XOR the lights, so either 0 or 1 presses of each button is needed. For each machine, loop through (1 << n) - 1 combinations. As an optimization I used a bit twiddling hack that iterates through combinations with 1 set bit first, then 2 bits set and so on, exiting early once we find a match. This reduces the time to 25% of the naive brute force, ~83µs on my machine.
+
+Part two was not solved by code, used Z3.
+1
+joltdx
+•
+14h ago
+[Language: Rust]
+
+For part 1, I am very happy with generating binary representations of things and pressing buttons using XOR.
+
+For part 2, haha, well, it ended up finally working and being performant through an iterative process of me trying something, having Gemini as a side-kick to suggest things, refactor stuff, optimizing whatnots, rinsing and repeating, until it was first of all giving a correct answer and secondly until running fast enough. Learned a lot in the process, next time I might consider finding a crate for it though... Crazy stuff
+
+https://github.com/joltdx/advent-of-code-2025/blob/main/day10/src/main.rs
+2
+u/wheresmylart avatar
+wheresmylart
+•
+14h ago
+[LANGUAGE: Python]
+
+Brute forced part 1.
+Part 2 is a system of linear equations. Spent several hour trying to work out how to use NumPy and SymPy before SciPy did the business.
+
+Paste
+1
+u/Eastern_Shallot_8864 avatar
+Eastern_Shallot_8864
+•
+14h ago
+[LANGUAGE: Python 3]
+Code
+I thought there might be a neat algorithm for part 1 but turns out it's NP-hard and I realised brute force isn't too bad. I basically checked every single possible combination of button presses (note that pressing a button twice is useless so we will have at most 1 press for each). That is 2^{Number of buttons} and I checked that the maximum number of buttons was 13 so in the worst case 2^13 * (187 machines) was not bad.
+I used bitmasking to go through every subset. Basically iterate i from 0 to 2^{buttons} - 1. And every number i represents a subset of buttons (if the jth bit is 1 then press the jth button otherwise don't).
+
+For part 2 I was able to represent the problem as a matrix equation. Then I did a bit of googling and learnt that linear programming solves exactly this kind of optimisation problem. Pretty nice day, didn't break my brain too much and I got to learn something.
+
+Part 1: ~121 ms
+Part 2: ~306 ms
+
+1
+u/bloub__ avatar
+bloub__
+•
+11h ago
+this is not np-hard
+1
+
+1 more reply
+michelkraemer
+•
+14h ago
+[LANGUAGE: Rust]
+
+GitHub
+
+Finally! I made it 💪 After many hours I found a solution. I'm very proud of myself 😊🤓
+
+I solved part 1 using a simple DFS with memoization.
+
+Part 2 was extremely hard for me. After looking at the results I got for some configurations with a very slow DFS and after trying out various approaches by hand, I realized that it is beneficial to try to eliminate those joltage values first that are affected by the smallest number of buttons. This way, we don't have to test millions of combinations and can prune branches as early as possible.
+
+In each recursion of my DFS, I look for the joltage value that is affected by the smallest number of buttons available. I then iterate over all possible integer partitions of this value and press the buttons accordingly. This eliminates the joltage value and at the same time likely reduces other values too. I then recurse with the reduced joltage values and the remaining other buttons until all joltage values are 0.
+
+My code runs in 17s 8.5s. I know this is slow, but at the moment I couldn't care less. I solved it myself (without any help and without an external library), which makes me very happy!
+
+EDIT: I implemented a second optimization. If multiple joltage values are affected by the same minimum number of buttons, I now select the highest one of them. This further reduces the problem space and improves the runtime to 8.5s!
+
+36
+u/vegeta897 avatar
+vegeta897
+•
+2h ago
+Thank you. I was sort close to something like this in my futile attempts, but I needed to see this. I adapted it to TypeScript, after struggling a bit to read Rust 😅. Still took a good 45 minutes to run on my input, with one machine taking like half an hour, but it's done!
+2
+
+1 more reply
+smugdor
+•
+6h ago
+Interesting, looks like there’s huge variation on the difficulty of some inputs. I tried your code on my input and it took 6 minutes on my not-underpowered machine.
+2
+
+1 more reply
+RussellDash332
+•
+8h ago
+Finally an actual non-ILP solution! Kudos
+1
+
+1 more reply
+jlhawn
+•
+8h ago
+Nice! I've got a Python solution to part 2 which does Gaussian Pre-pass with a dfs with pruning (no 3rd party libraries) which runs in just under 4 minutes! I rewrote it in Go and made each machine run concurrently and _that_ takes less than 3 seconds!
+3
+
+1 more reply
+ u/dernett avatar
+dernett
+•
+11h ago
+I tried something similar at first, but there's a particular machine in my input that just took forever to run. Your code did much better and found it in ~1m30s.
+4
+
+1 more reply
+piratnisse
+•
+12h ago
+Well done! You should be proud :)
+5
+
+1 more reply
+spookywooky_FE
+•
+12h ago
+I did basically the same, but it runs actually 3 hours 20 minutes :/ But still proud of it :)
+4
+
+1 more reply
+Old-Dinner4434
+•
+15h ago
+[LANGUAGE: TypeScript]
+
+GitHub
+
+I use Bun runtime engine, running on 2021 M1 Pro MacBook Pro. Part one completed in 4.85ms, part two in 37.49ms.
+
+Insane day. Insane amount of research was needed. I linearized the machine wiring into A·x = y, reduced A with Gaussian elimination, enumerated the low-dimensional nullspace, back-substituted to get full candidate x vectors, rejected infeasible ones, and picked the minimum-cost solution. Part 1 works over GF(2) with binary x, part 2 over set of non-negative integers.
+4
+u/yfilipov avatar
+yfilipov
+•
+15h ago
+[LANGUAGE: C#]
+
+Well, today was tough. Really tough.
+
+Part 1 is a standard DFS with min distance. Using bitmasks instead of arrays and strings cut the execution time from a minute to 15ms. Not bad.
+
+And then came Part 2. The dread, the horror... I had already used Z3 back in 2023, and it felt bad. Back then I started to play around and try to implement a Gaussian extraction. It worked to an extent, but only for square matrices.
+
+So, today we hit another Linear Algebra problem with a system of equations. I was determined that this time I was going to do it without any external libraries. Iterating over the possible solutions with free variables was generating billions of iterations - impossible. I started reading, and looking into ways to optimize the search for a solution to the system of equations. I added checks if the intermediate sum was already higher than the current minimal sum, and it helped a little. I added constraints (magic numbers) for the number of iterations, but I was still not able to solve all of the machines.
+
+Still determined not to use any external libraries, I did something even worse: I used Copilot.
+
+It took quite a while to come up with the proper optimizations. My prunings were already kinda OK-ish. The agent suggested the GCD approach, and I let it fiddle with the input and the magic numbers, and in the end it worked.
+
+I hope I will not offend anyone by sharing my code here, although I have broken the Prime Directive. Please do not turn this into a discussion on using agents. For me it was actually useful - I learned a lot.
+
+Anyways, here's the code:
+
+Advent of Code - 2025 - Day 10 - Pastebin.com
+
+1
+MyAoCAccnt
+•
+6h ago
+I don't see using Co-pilot as an issue in the way you did. You used it to learn. This is how I like to use AI. I know Google has the answer, but ChatGPT can explain it to me so much better. People use outside tools all of the time in AOC to understand the problem better or learn something new, and that's all you did.
+2
+u/daggerdragon avatar
+daggerdragon
+MOD
+•
+10h ago
+I hope I will not offend anyone by sharing my code here
+The Solution Megathread is the correct place to share your code.
+
+although I have broken the Prime Directive.
+Eh? Your comment and code are fine. What are you talking about? ?¿?¿?¿
+2
+
+2 more replies
+learn_by_example
+•
+15h ago
+[Language: Rust]
+
+Link to source
+
+Part1 was a straightforward BFS. For Part2 I also tried the same approach but very quickly realized that this isn't ever going to return. I checked the subreddit and found that most people were using linear programming solvers and related libraries. I didn't want to do this research for Rust, and eventually decided to be brave enough and implement a variant of Differential Evolution. The approach worked as I thought, but the program did take 3 hours and 40 minutes to run! Of course at the end of it, it spit out the correct answer.
+
+I'll try and improve the optimization by trying out floating point values for my solution space, instead of integers. Also I might try out other population based techniques like Particle Swarm Optimization or Genetic Algorithms (I've implemented these in Rust before and even made a video on these topics on my YT channel). It's amazing that I got to use a non-deterministic optimization technique for an AOC problem today!
+2
+BendisCZ
+•
+15h ago
+[LANGUAGE: Go]
+
+Part 1 – simply check all combinations of buttons (every button will be pressed at most once).
+
+Part 2 – solving a system of linear equations + checking all combinations for unconstrained variables, without Z3 (although I used it for debugging).
+
+Both parts together: ~370ms.
+
+https://github.com/bendiscz/aoc/blob/master/2025/10/2025-10.go
+3
+u/r_so9 avatar
+r_so9
+•
+15h ago
+[LANGUAGE: F#] paste
+
+Part 1 is a neat BFS, using the buttons and target converted to int and bitwise XOR to generate neighbors. Part 2, after trying a greedy knapsack (which only work for about half of the test cases, I went on to learn Z3 for the first time in 520 stars :)
+
+The Z3 code is mostly translated from u/Visual_Strike6706 's C# solution.
+
+Interesting bit: I like my integer BFS with XOR as adjacency function for part 1
+let flipBits (options: int array) (pt: int) =
+    options |> Seq.map (fun button -> button ^^^ pt)
+
+let buttonValue length (button: int array) =
+    button |> Array.fold (fun acc i -> acc + (1 <<< length - i - 1)) 0
+
+let diagramValue diagram =
+    diagram
+    |> String.map (fun c -> if c = '#' then '1' else '0')
+    |> fun s -> Convert.ToInt32(s, 2)
+
+let part1 =
+    input
+    |> Array.sumBy (fun (target, buttons, _) ->
+        let adjacent = buttons |> Array.map (buttonValue (String.length target)) |> flipBits
+        bfs adjacent 0 (diagramValue target))
+4
+tymscar
+•
+15h ago
+[LANGUAGE: Gleam]
+
+I am conflicted about today. Part 1 was probably my favorite puzzle this year but part 2 left me a bit sad.
+
+Part 1 clicked instantly for me and I solved it in a few minutes. As soon as I saw the toggle behavior I knew it was XOR and that I could represent everything as bits. The lights become a target number and each button becomes a bitmask. Then all I needed was to find the smallest set of buttons that XOR together to give me the target. I used list.combinations starting from size 0 and going up, and fold_until to quit early when I found a match. Only trick was reversing the light pattern string before parsing because of endianness (button 0 affects the leftmost light but that needs to be the least significant bit). Super satisfying.
+
+Part 2 though took me the better part of an hour. As soon as I saw it I knew brute force was out. Its clearly a system of linear equations and I immediately thought of Z3 like in previous years. Sadly there are no Z3 bindings for Gleam or Elixir or Erlang. I tried fixpoint which is a constraint solver for Elixir but it had compatibility issues with my Elixir version. So I ended up shelling out to glpsol from the GNU Linear Programming Kit. The LP file format is actually beautiful and simple to generate. I inverted the button mappings so instead of "button X affects counters Y and Z" I had "counter Y is affected by buttons A and B", then wrote out the constraints and minimized total presses. It works great but I wish I didnt need an external tool. I am sure there is a pure algorithmic way to solve this but its too maths heavy for me.
+
+One minor Gleam gripe: you can pattern match [first, ..rest] or [first, second] but not [first, ..middle, last]. Would have been handy for parsing.
+
+Part1 and part2
+2
+u/Foldzilla avatar
+Foldzilla
+•
+15h ago
+[LANGUAGE: Haskell]
+
+Not proud of this one, part 1 just BFS until the goal is reached. Part 2 done by Z3 in Python since I have little time today.
+
+https://github.com/JustinKasteleijn/AdventOfCode2025/blob/main/day10.hs
+0
+u/WillMatt avatar
+WillMatt
+•
+15h ago
+[Language: Go]
+
+GitHub
+
+Had to also lean on z3 for Part 2 like most everyone else :/
+1
+IvanR3D
+•
+15h ago
+[LANGUAGE: javascript] Part 1
+
+My solutions: https://ivanr3d.com/blog/adventofcode2025.html#10
+
+My solution (to run directly in the input page using the DevTools console).
+1
+u/cay_horstmann avatar
+cay_horstmann
+•
+15h ago
+[Language: Java]
+
+Part 1: Dijkstra, Part 2: Z3, https://github.com/cayhorstmann/adventofcode2025/blob/main/Day10.java
+
+First time that I did anything with Z3. The Java bindings looked ugly, so I just generated the program in their own language and ran it in a process.
+0
+se06745
+•
+16h ago
+[LANGUAGE: GoLang]
+
+https://github.com/omotto/AdventOfCode2025/blob/main/src/day10/main.go
+
+First part through BFS easy peasy.
+Second part no idea how to do it faster. Then I used as others LP external package. :-(
+1
+u/house_carpenter avatar
+house_carpenter
+•
+16h ago
+[LANGUAGE: Python]
+
+Solution
+
+Fairly straightforward for me---part 1 was solved by brute force, part 2 was solved by integer linear programming (using scipy). I knew about integer linear programming from previous years' problems.
+1
+u/No_Mobile_8915 avatar
+No_Mobile_8915
+•
+16h ago
+[LANGUAGE: Python]
+
+Part 1: paste
+
+Part 2: paste
+
+1
+u/mgedmin avatar
+mgedmin
+•
+14h ago
+saving everyone a click: scipy.linalg for part 2.
+2
+Remarkable-King1433
+•
+16h ago
+[LANGUAGE: C++]
+
+Not heavily optimized recursive search, but with some minor optimizations, passed in under 10 minutes for part 2; more than 9.5 minutes on 11th test case.
+
+C++ code
+1
+birdnardo
+•
+16h ago
+[LANGUAGE: Mathematica]
+
+I learned something about linear algebra over integers modulo 2 today. I am still thinking if that could have been modeled as a 2SAT problem.
+
+For part 2 I switched to linear optimization.
+(*parsing*)
+data = Fold[StringSplit, input, {"\n", " "}];
+ToExpression@StringCases[#[[2 ;; -1]], DigitCharacter ..] & /@ data;
+{toggle, jolt} = {%[[;; , 1 ;; -2]], %[[;; , -1]]};
+light = (Characters[data[[;; , 1]]][[;; , 2 ;; -2]]) /. {"." -> 0, 
+    "#" -> 1};
+
+oneHot[v_, m_] := 
+ Module[{vv, k}, vv = Table[0, {k, 1, m}]; vv[[v + 1]] = 1; Return[vv]]
+m = Transpose /@ Table[
+    oneHot[toggle[[j, k]], Length[light[[j]]]]
+    , {j, 1, Length[toggle]}, {k, 1, Length[toggle[[j]]]}];
+
+(*part 1*)
+Table[
+  s0 = LinearSolve[m[[k]], light[[k]], Modulus -> 2];
+  ker = NullSpace[m[[k]], Modulus -> 2];
+  (Total /@ ((Mod[s0 + #, 2]) & /@ (Tuples[{0, 1}, Length[ker]] . 
+         ker))) // Min,
+  {k, 1, Length[light]}] // Total
+
+(*part 2*)
+Table[(# /. 
+       LinearOptimization[
+        Total[#], {(# >= 0) & /@ #, 
+         m[[k]] . # == jolt[[k]]}, {# \[Element] Integers}] // 
+      Total) &@Table[Subscript[x, i], {i, 1, Length[m[[k, 1]]]}], {k, 
+   1, Length[light]}] // Total
+1
+u/Jadarma avatar
+Jadarma
+•
+17h ago
+[LANGUAGE: Kotlin]
+
+Today's problem was interesting, but very dissapointing because I could not find any solution for part two apart from relying on SAT solvers. Here I was contemplating whether I should be able to use my own util lib in my solution, and now I'm (kinda) forced to resort to external libraries? And one by Microsoft, no less. I managed to survive previous years without Z3, but so far I haven't found an alternative... A sad day indeed, but at least I got the star. Hoping to refactor back if I find any reasonably fast alternative.
+
+Part 1: When you hear shortest number, it's usually a disguised pathfinding problem. We start from the state of all lights being off, then we associate pressing a button to "walking" into that direction, reaching a new state with the accordingly flipped lights. I reused the same Dijkstra util I made previously and it worked like a charm, but a simple DFS should also work.
+
+Part 2: Technically, it's the exact same problem, but instead of flipping lights we increment the counter. Only problem is, you cannot take shortcuts, and since you increment by one each time, and the input has counter targets in the hundreds, there's no way we could compute this with such a large branching factor, didn't even bother. The intended solution is to translate the problem into a system of equations, and then solve for the correct number of presses of each button, the solution is their sum. However, I am nowhere near capable enough to implement LIP on my own. I turned to this thread hoping I'd find some tricks, but all I see is defeatism and Z3... so I will join in. But hey, at least it works, and it's fast, and mostly readable.
+
+AocKt Y2025D10
+4
+omegablazar
+•
+17h ago
+[LANGUAGE: Rust]
+
+Part 1 used a custom binary array library for the lights and buttons, and simply XORed them. Part 2 did what most people did: used z3. Not happy about that.
+
+Part 1: 1.10ms
+Part 2: 59.7ms
+
+https://github.com/wrightdylan/advent-of-code-2025/blob/main/src/day10.rs
+2
+hiimjustin000
+•
+17h ago
+[Language: JavaScript]
+
+Credits to u/Mikey_Loboto for most of the logic in part 2.
+
+https://github.com/hiimjasmine00/advent-of-code/blob/master/2025/day10/part1.js
+
+https://github.com/hiimjasmine00/advent-of-code/blob/master/2025/day10/part2.js
+2
+WilkoTom
+•
+17h ago
+[LANGUAGE: Rust]
+
+Solution
+
+Part 1 I solved using logical XOR against a bitwise representation of the lights. That turned out to be a mistake when I saw part 2.
+
+Part 2: Solved using an LP wrapper (good_lp). I've not had occasion to use one before, so learning how to plug it all together took me a while. Code is extensively commented, mostly so when I need one of these again, I can remember how it works.
+1
+bakibol
+•
+17h ago
+[Language: Python]
+
+Part one is a nice BFS problem. Symmetric difference was quite handy (lights is a frozenset, schematics is a list of frozensets):
+
+def find_fewest_presses_part_one(machine):
+    lights, schematics, _ = machine
+    start = frozenset()
+    queue = deque([(start, 0)])
+    seen = {frozenset()}
+    while queue:
+        curr, presses = queue.popleft()
+        if curr == lights:
+            return presses
+        for s in schematics:
+            new = curr ^ s
+            if new not in seen:
+                seen.add(new)
+                queue.append((new, presses + 1))
+I used PuLP for part 2.
+2
+_garden_gnome_
+•
+18h ago
+[LANGUAGE: Python]
+
+Github: No use of external libraries, nor did I write an equation solver or simplex algorithm.
+
+Part 1: standard BFS, not much more to say.
+
+Part 2:
+
+I reorder the wirings. Roughly speaking, wirings that contain joltage ids that feature in the fewest wirings come first - I have the fewest choices for those joltage ids and I want to make those decisions early. If I have multiple wirings for such an id, I chose the wiring that includes the most other joltage ids first - I want to bring down the targets for those other ids early as well. This heuristic is important to speed up the calculations.
+I go through the wirings one at a time, chose how often I apply the current wiring via a loop, update the remaining targets for all joltage ids, and then recursively call the same process for the next wiring, and so on. There are a number of checks along the way: a) if the number of current presses exceeds the best found solution, I exit from that branch of the recursion. b) the maximum number I can use the current wiring is the smallest remaining target for joltage ids included in that wiring. c) if the current wiring contains a joltage id for the last time, i.e. all future wirings that come afterwards won't contain that id anymore, then I know that the minimum I have to use this wiring is the remaining target for that joltage id. d) I only test values for using the current wiring between these minimum and maximum values.
+For my inputs, this runs part 2 in about 30s.
+
+12
+u/firetech_SE avatar
+firetech_SE
+•
+9h ago
+FYI: I tried implementing something similar just to have a solution not based on Z3 (which I had previously used to submit my answer). After some fiddling back and forth, I noticed that, for at least my input, you can get it to finish up to twice as fast by going through the possible number of presses for each button in reverse (i.e. for presses in range(mn, mx + 1): -> for presses in range(mx, mn - 1, -1): in your code).
+2
+
+1 more reply
+ u/sad_bug_killer avatar
+sad_bug_killer
+•
+14h ago
+I had a very similar idea for part2, came here to check if anyone has done it, so I don't waste time on dead ends. Saw your comment, thought "I can wait 30s". Coded the solution and ran it... then killed it after an hour. Tried your exact code too, it didn't finish in 30 minutes for my input.
+
+So today I learned about z3, because my input was special ¯\_(ツ)_/¯
+5
+
+3 more replies
+ojoelescalon
+•
+18h ago
+[LANGUAGE: Rust]
+
+For Part1 I converted the target and buttons to ints (for example (0,2) becomes 5) because I thought it would be more convenient for part2, but it was not. The approach is to do BFS and XOR, keep a set of the visited states (numbers) and return as soon as a number matches the target state.
+
+Part2 is just z3. Each button press must be >=0, the sum of the presses for all buttons containing the index "i" must be equal to targets[i], and we must minimize the total presses. Honestly I did Part2 in Python and used an LLM to translate it to Rust because the documentation for z3 in Rust is non-existent.
+
+Code
+
+2
+evouga
+•
+17h ago
+What made you choose z3? Did you have experience using this library before?
+
+(I'm wondering since although an SMT solver *can* solve integer linear programs, it's not on e.g. Google's top hits for ILP solver.)
+1
+
+2 more replies
+ u/deividragon avatar
+deividragon
+•
+18h ago
+[Language: Rust]
+
+For part 1 I did BFS using XOR on the arrays until a match is found. For Part 2 I kinda didn't want to implement solving linear equations myself so I searched around for crates for linear programming and ended up using microlp. Not much documentation going around so here's the syntax for my part 2 solution in case it helps anyone!
+
+fn times_to_match_joltage(machine: &(BooleanVector, Vec<BooleanVector>, Vec<u64>)) -> u64 {
+    let (_, buttons, joltage) = machine;
+    let mut problem = Problem::new(OptimizationDirection::Minimize);
+    let mut vars = Vec::new();
+    for _ in 0..buttons.len() {
+        vars.push(problem.add_integer_var(1.0, (0, i32::MAX)));
+    }
+    for constraint in 0..joltage.len() {
+        let mut equation = LinearExpr::empty();
+        for variable in 0..buttons.len() {
+            if buttons[variable][constraint] {
+                equation.add(vars[variable], 1.0);
+            }
+        }
+        problem.add_constraint(
+            equation,
+            ComparisonOp::Eq,
+            joltage[constraint] as f64,
+        );
+    }
+    problem.solve().unwrap().objective().round() as u64
+}
+Full code
+3
+HappyPr0grammer
+•
+18h ago
+[Language: Java]
+
+github
+
+Part 1:
+
+Brute force: test the solution for all possible subsets.
+
+Part 2:
+
+After very long attempts, I came up with the idea of solving the problem as a system of equations. Here, the Java library org.matheclipse failed. Not all equations could be solved, and the other solutions were not always correct (I could not force the library to deliver only positive results). In the end, I wrote a Java generator that generates Python code for me. I executed the code with Python and got the result immediately.
+1
+u/MadaraU avatar
+MadaraU
+•
+18h ago
+[Language: Rust]
+
+First part - We have 10 buttons at worst per machine, and roughly 200 machines per input, so at worst about 200,000 combinations to check. I just straight up brute forced it.
+Second part - Tried BFS at first, while it was running I wrote the z3 solution, BFS didn't finish by the time I finished writing z3, so went with z3 :D. Added parallelism because why not.
+
+Code: https://github.com/MadaraUchiha/aoc-2025/blob/main/src/days/day10/mod.rs
+❯ cargo run --release -- --day 10
+    Finished `release` profile [optimized] target(s) in 0.06s
+     Running `target/release/aoc-2025 --day 10`
+Day 10
+====================
+Reading input took: 30.07µs, read 17210 bytes
+Part 1 solution: 461, took: 658.159µs
+Part 2 solution: 16386, took: 70.883492ms
+1
+u/krystalgamer avatar
+krystalgamer
+•
+18h ago
+[Language: Python]
+
+First part just greedily iterate the combinations.
+
+Second, I didn't realize the light status was irrelevant. Since it's a simple constraint system, just pulled out Z3.
+
+Code: https://gist.github.com/krystalgamer/2a226ff060838a2894a6b9e2ea3a2e66
+0
+u/dannybres avatar
+dannybres
+•
+18h ago
+[LANGUAGE: MATLAB]
+
+Pretty simple, each button only needs pressing once so:
+
+Built a binary matrix from 1 to 2^(numberOfButtons-1) and sorted by number of 1s
+Calclulated state of all lights at end of every press combo
+Picked the first number of presses that meets the target light configuration
+Summed them all
+%% day10puzzle1 - Daniel Breslan - Advent Of Code 2025
+data = readlines("input.txt");
+
+day10puzzle1result = 0;
+for dataIdx = 1:numel(data)
+    machineInfo = data(dataIdx).split(" ");
+    target = char(machineInfo(1).extractAfter(1)...
+        .extractBefore(strlength(machineInfo(1))-1)) == '#';
+
+    buttonOutputs = false(numel(machineInfo) - 2, numel(target));
+    for idx = 2:numel(machineInfo) -1
+        buttonOutputs(idx-1,machineInfo(idx)...
+            .extract(digitsPattern).double + 1) = true;
+    end
+
+    pressOptions = dec2bin(1:(2^height(buttonOutputs)-1)) == '1';
+    [~,so] = sort(sum(pressOptions,2));
+    pressOptions = pressOptions(so,:);
+    
+    idx = find(all(mod(pressOptions * buttonOutputs,2) == target,2),1);
+    day10puzzle1result = day10puzzle1result + nnz(pressOptions(idx,:));
+end
+day10puzzle1result
+Realised it is Linear Algebra, tried solving myself, but realised i couldnt, some where singular, some solutions where negative, so did some research and found  intlinprog, which worked lovely! :)
+%% day10puzzle2 - Daniel Breslan - Advent Of Code 2025
+data = readlines("input.txt");
+
+day10puzzle2result = 0;
+opts = optimoptions('intlinprog', 'Display', 'off');
+for dataIdx = 1:numel(data)
+    machineInfo = data(dataIdx).split(" ");
+    target = machineInfo(end).extract(digitsPattern).double';
+    numButtons = numel(machineInfo) - 2;
+
+    buttonOutputs = false(numButtons, numel(target));
+    for idx = 2:numel(machineInfo) -1
+        buttonOutputs(idx-1,machineInfo(idx)...
+            .extract(digitsPattern).double + 1) = true;
+    end
+
+    presses = sum(intlinprog(ones(numButtons,1), 1:numButtons, [], [], ...
+        double(buttonOutputs)', target', zeros(numButtons,1),[],opts));
+    day10puzzle2result = day10puzzle2result + presses;
+end
+
+day10puzzle2result
+1
+u/viralinstruction avatar
+viralinstruction
+•
+19h ago
+[Language: Julia]
+
+Parsing and running part 1 only: 178 microseconds.
+
+The core idea is that no button can be pushed more than once (since it will cancel itself out). So, for N buttons, all possible solutions is an integer in [0, 2N-1]. We then run through all the integers in order of population count by creating a population count integer iterator.
+
+To check a sequence integer, Each push is an XOR with the button, that is represented by a bitfield of the lights it toggles. Run through all buttons corresponding to a set bit in the sequence integer. If, after all buttons, the light state is zero, it's a valid solution and we return it immediately.
+
+Code: https://github.com/jakobnissen/AoC2025/blob/master/src/day10.jl
+
+1
+u/Head-Alarm6733 avatar
+Head-Alarm6733
+•
+17h ago
+you can use gospers hack to optimize this a bit
+2
+
+2 more replies
+ 
+FCBStar-of-the-South
+•
+19h ago
+lboshuizen
+•
+19h ago
+[Language: F#]
+
+github.com/lboshuizen/aoc25
+
+What a day...
+
+Part 1 operates over GF(2), the binary field where XOR is addition. Gaussian elimination yields reduced row echelon form. Free variables exist when buttons are linearly dependent. Enumerate all 2k assignments (k small) and pick the minimum-weight solution.
+
+So far so good.
+
+Part 2 works over integers with non-negativity constraints. Standard Gaussian elimination expresses pivot variables as functions of free variables. The naive search through all free variable combinations up to max joltage proved too slow: 65 million iterations for the worst machines.
+
+Got the second star but took over a minute to run.
+
+The fix: feasibility pruning. After partial assignment, check whether the remaining free variables can ever make all pivots non-negative. If a pivot goes negative and all remaining coefficients are non-negative, no assignment can recover. Pruning these branches reduced runtime from 62 to 2 seconds.
+
+pseudo code:
+
+canBeFeasible(assigned):
+    for each pivot row:
+        val = constant - Σ(coeff * assigned)
+        if val < 0 and no remaining coeff < 0:
+            return false
+    return true
+
+search(idx, assigned, sum):
+    if sum >= best: return
+    if not canBeFeasible(assigned): return
+    if idx = numFree: update best
+    else:
+        for v in 0..maxJoltage:
+            assigned[idx] = v
+            search(idx+1, assigned, sum+v)
+real implementation on github, too long to post here. 80 lines of unreadable mess
+5
+u/Sharparam avatar
+Sharparam
+•
+19h ago
+[LANGUAGE: Ruby]
+[LANGUAGE: Python]
+
+Did part 1 in Ruby, and then had to admit defeat and use Python and Z3 for part 2.
+
+Makes me wish there were Z3 bindings for Ruby that are not in "very early stages of development".
+1
+
+2 more replies
+ u/smallpotatoes2019 avatar
+smallpotatoes2019
+•
+19h ago
+[LANGUAGE: Python]
+
+Both parts complete. Not delighted with my Part 2. I had various approaches which should have worked but never in any reasonable time. In the end, a bit of googling and trying some new libraries (which I'm not very familiar with yet in Python) got me the answer, but it feels a little empty. I'm not sure if my part 2 was set to complete in days, weeks or years, but I didn't have the time to wait and find out!
+
+I'll certainly be returning later to see if I can get a more satisfactory solution.
+
+Solution
+1
+Mikey_Loboto
+•
+20h ago
+[Language: JS] (Node)
+GitHub
+
+Nothing to be proud of, but hey, at least I learned something new today (that Z3 exists)...
+2
+MyEternalSadness
+•
+20h ago
+[Language: Haskell]
+
+Part 1- 8.82 ms
+
+Part 2 -1.16 s
+
+Came up with a pretty nice solution for Part 1. Built a GF(2) matrix (bit masks represented using integers) where each row corresponds to a light, and the columns are buttons that will toggle that particular light. (A 1 indicates that that particular button will toggle that light.) Set up a linear system and solve via Gaussian elimination to determine pivot and free variables (button presses). Back substitute with all free variables set to 0 to get a single solution. Then set different combinations of free variables to 1 with that solution to find the optimal (minimal) solution. GF(2) is quite elegant here, as multiplying two rows of the matrix is a simple fast XOR operation.
+
+Part 2 was nasty, nasty, nasty. I knew I needed to abandon GF(2) and use a full linear integer system to solve this. But all my attempts to prune the search space were fruitless. I ultimately did what a lot of other people here did - pipe the constraints into Z3, call Z3 from Haskell, and then get the answer back and display it. Not my finest moment, but oh well.
+2
+u/MarcoDelmastro avatar
+MarcoDelmastro
+•
+20h ago
+[LANGUAGE: Python]
+
+https://github.com/marcodelmastro/AdventOfCode2025/blob/main/Day10.ipynb
+
+BFS and bitwise XOR operation for Part 1. I initially thought I could adapt my BFS solution for Part 2, but while it works for the example, even with pruning the solution space is still too large for the full input.
+
+Thinking more carefully, I tried a mathematical approach (Part 2 is effectively a linear system with constraints), using `scipy.optimize.milp` to solve (MILP = Mixed-Integer Linear Programming). Most of the complexity was in properly encoding the constraints (integer non-negative solutions, minimal sum).
+
+Part 2 result was initially wrong by 1 becouse of a @$%^& rounding error when casting result to int!
+
+Definitely harder than yesterday, but in a different way (required more mathematical thinking and knowledge of specialized tools).
+
+3
+IdiotaCompleto
+•
+5h ago
+Indeed the second part required much more mathematical thinking, but not necessarily any special tools. Using gcd from math should suffice.
+1
+
+[deleted]
+•
+20h ago
+GreakFreak3434
+•
+20h ago
+[LANGUAGE: CPP, Python]
+
+Part 1:
+
+Some DP
+
+https://pastebin.com/NmhC3KDL
+
+Part 2:
+
+I really did not want to write an LP solver or use a cpp library so I took the easy way out :(
+
+https://pastebin.com/eZunLjS4
+0
+u/Ok-Bus4754 avatar
+Ok-Bus4754
+•
+20h ago
+[Language: Rust]
+
+For Day 10 Part 2, standard solvers struggled with singular matrices. I initially prototyped a custom Simplex + Branch & Bound solver in Python (adapted from u/RussellDash332 with minor improvements), which worked great (~119ms).
+
+I decided to port this logic to Pure Rust to improve performance and remove heavy dependencies.
+
+The Solution:
+
+Zero Dependencies: No nalgebra  or external LP crates.
+Custom Simplex: Ported the logic to Rust manually.
+Branch & Bound: Handles exact integer solutions for rank-deficient matrices.
+Performance:
+
+Language (Mode)	Part 1	Part 2
+Python	~11 ms	~119.4 ms
+Rust (Debug)	~32.8 ms	~59.5 ms
+Rust (Release)	~1.47 ms	~2.46 ms
+The Rust port is ~48x faster and extremely lightweight.
+
+https://github.com/Fadi88/AoC/tree/master/2025/days/day10
+
+9
+u/cach-e avatar
+cach-e
+•
+18h ago
+And I now adapted your solution into Swift. It is very rare I give up and look at code for Advent of Code, but today was that day.
+3
+
+6 more replies
+ u/thekwoka avatar
+thekwoka
+•
+20h ago
+oh that's so smart approach!
+
+I didn't read how you implemented, will later, but just enough to have the "AHA!!!"
+2
+RussellDash332
+•
+20h ago
+Amazing! What's the minor improvement though? 😏
+1
+
+1 more reply
+ u/ziadam avatar
+ziadam
+•
+20h ago
+[LANGUAGE: Google Sheets]
+
+Part 1 (expects input in A:A)
+
+=ARRAYFORMULA(REDUCE(0, TOCOL(A:A, 1), LAMBDA(r, a, r + LET(
+   p, SPLIT(REGEXREPLACE(a, "{.*",), "[]() "),
+   d, INDEX(p,,1),
+   i, SEQUENCE(LEN(d)) - 1,
+   t, SUM((MID(d, i+1, 1) = "#") * 2^i),    
+   b, CHOOSECOLS(p, SEQUENCE(COLUMNS(p) - 1, 1, 2)),
+   sm, SPLIT(TOCOL(b), ","),
+   m, MMULT((sm <> "") * 2^sm, SEQUENCE(COLUMNS(sm)) ^ 0),
+   BFS, LAMBDA(BFS, c, s, v,
+     IF(OR(t=c), s,
+       LET(
+         n, TOCOL(BITXOR(c, TOROW(m))),
+         nv, UNIQUE(FILTER(n, ISNA(XMATCH(n, v)))),
+         BFS(BFS, nv, s+1, {v; nv})
+       )
+     )
+   ),
+   BFS(BFS, 0, 0, 0)
+))))
+Repo
+2
+u/yieldtoben avatar
+yieldtoben
+•
+21h ago
+[LANGUAGE: PHP]
+
+PHP 8.5.0 (with z3) paste
+
+Execution time: 1.2687 seconds
+Peak memory: 0.4741 MiB
+
+MacBook Pro (16-inch, 2023)
+M2 Pro / 16GB unified memory
+2
+Chemical_Chance6877
+•
+21h ago
+[LANGUAGE: Javascript]
+
+(Part1)
+
+Code
+
+I started by generating the whole graph of possible states. (which where at most 2**10), and fully connected them for every possible button press
+
+Then i ran dijkstras algorithm on the start node. to find the shortest path to my goalnode.
+Not the most efficient solution, but still ran in a couple of seconds
+2
+amadejjj
+•
+21h ago
+[LANGUAGE: go] https://github.com/amadejkastelic/advent-of-code-go/blob/main/internal/solutions/2025/day10/solution.go
+
+Had to use lp_solve, since bfs was too slow.
+
+Part 1: 14.530584ms
+
+Part 2: 13.540458ms
+2
+u/nitekat1124 avatar
+nitekat1124
+•
+21h ago
+[LANGUAGE: Python]
+
+GitHub
+
+use BFS in part 1
+part 2 can be considered as linear equations, and I use z3 to solve it cause I'm a lazy person lol
+
+2
+u/flyingfox avatar
+flyingfox
+•
+20h ago
+Ha, very similar to my approach... except for the 90 minute "there must be a SciPy way to do this" detour. Oh, and the extra half an hour trying to remember how to use z3 again and cribbing of my solutions from previous years.
+1
+
+2 more replies
+ayoubzulfiqar
+•
+21h ago
+[LANGUAGE: Go] [LANGUAGE: Python] [LANGUAGE: Dart]
+
+SAY NO TO ANY EXTERNAL LIBRARIES:
+
+without using any external libraries. wrote this brick by brick. used mutli-processing/threads to execute it fast
+
+Go
+
+Python
+
+Dart
+6
+u/runnerx4 avatar
+runnerx4
+•
+21h ago
+[LANGUAGE: Guile Scheme]
+
+and GLPK through glpsol in shell I gave up on part 2 in scheme, please have some consideration for languages without a huge ecosystem lol
+
+at least i am proud of my part 1 using xor, that i immediately got (except i thought that the starting state was the buttons and i had to reach all 1s, instead of from 0s to target state)
+
+code paste
+1
+p88h
+•
+22h ago
+[LANGUAGE: Odin + GLPK ]
+
+Solution : [ GitHub ]
+
+First part is just BFS, for the second one I tried using Gaussian elimination and then iterating over free variables but it was still super slow, and couldn't really come up with decent heuristics. I implemented a PoC solution with milp in python first, but that felt like 'cheating'. Z3 was slow (much slower than either linprog or milp in scipy), but i've experimented with GLPK which I can link to semi-natively and this worked really well. So at least learned a new library & how to interact with foreign libraries in Odin.
+
+Still no idea if there is a better solution though. But considering that part1 takes 0.2 ms and part2 is same order of magnitude, I wouldn't expect significant improvements here overall.
+
+EDIT: finetuned threading for further 0.2 ms reduction. Both parts run multi-threaded.
+        parse   part1   part2   total
+day 10:  0.1 ms 94.5 µs  0.5 ms  0.7 ms (+-2%) iter=9010
+
+1
+u/Akaibukai avatar
+Akaibukai
+•
+15h ago
+I'm impressed with Odin (which I never heard of before this AoC)...
+
+I'm doing mainly Elixir these days but for a given project I'll need to do some heavy computation and I'm still thinking if I should go with Rust or Zig.. Now, I'll also take a look at Odin..
+1
+
+2 more replies
+ u/JustinHuPrime avatar
+JustinHuPrime
+•
+22h ago
+[LANGUAGE: x86_64 assembly]
+
+Part 1 wasn't too bad - I parsed the data into 16-bit values, and treated them like binary masks. I probably should have realized that pressing any button more than once was always incorrect, but I did a BFS through the possible button press sequences.
+
+Part 2 was not efficient enough. My code was another BFS through the possible sequences of button presses, using fancy vectorized calculations and multithreading, but alas, this was too slow and used up too much memory. I could run the example input, but even that took a whole seven seconds, and the read input ended up with OOM kills for certain lines.
+
+I decline to try to write an integer programming solver in assembly, and since my personal rules don't let me used external libraries, like Z3, I don't think I'm going to be solving part 2.
+
+Part 1 runs in 43 milliseconds, and part 2 runs in 6.57 seconds on the example. Part 1 is 9,888 bytes and part 2 is 10,360 bytes as executable files.
+
+7
+KyxeMusic
+•
+14h ago
+I decline to try to write an integer programming solver in assembly
+No need to explain yourself there
+9
+u/Background_Nail698 avatar
+Background_Nail698
+•
+22h ago
+[LANGUAGE: Python]
+
+Github: https://github.com/roidaradal/aoc-py/blob/main/2025/2510.py
+
+Time: 0.32s for both parts
+
+Part 1: Used BFS to look for shortest path from start state to goal state
+
+Part 2: Used SciPy to solve the Linear Programming problem of minimizing the total number of button presses, while satisfying the constraint regarding the total button presses being equal to the joltage values
+
+This one took me the longest to solve so far. Day 1-9 have all been solved in under 1 hour (everything except 2 took less than 30mins). First part took me 17 minutes, while the 2nd part took me ~3hours to solve.
+
+Tried BFS, DFS, Dijkstra's, A* first for Part 2, but they all took too long. Also tried to use a constraint satisfaction library from python, but it also took too long. That's when I figured you can pose this as a linear programming problem and used SciPy.
+
+2
+JadeSerpant
+•
+22h ago
+How did you try Dijkstra for part 2 as there are no edge weights? I tried A* with this heuristic: `max(target[i] - next_state[i] for i in range(m))` before switching over to an ILP solver.
+1
+
+4 more replies
+xelf
+•
+22h ago
+[LANGUAGE: Python 3 + scipy]
+
+total = 0
+for il, sc, jr in machines:
+    target, buttons = list(eval(jr)), [*map(eval,sc.split())]
+    c = [1]*len(buttons)
+    A = [[i in b for b in buttons] for i in range(len(target))]
+    total += scipy.optimize.milp(c,constraints=[A, target, target],integrality=c).fun
+print("p2", total)
+I originally started trying to adjust my bfs from part 1 and it worked fine on the test data and the first couple lines of the input, and then just died.
+
+While I'm sure the constraints lend this to a simpler solution I googled if it was reasonable for me to implement my own ILP and got back this:
+
+Solving a pure Integer Linear Programming (ILP) problem in Python without using any specialized third-party optimization libraries is highly complex and generally impractical.
+
+Why Avoid Implementing From Scratch? Complexity: ILP is an NP-hard problem
+So off to scipy it was. I'll continue looking into a dfs approach as I'm pretty sure we're not meant to have to use prebuilt libraries.
+
+2
+u/SkiFire13 avatar
+SkiFire13
+•
+20h ago
+Tbh implementing a basic ILP solver that works for toy examples (like today's problem) does not take too long (but of course you need to read/know about the theory behind). The real time sink/complexity comes from implementing cuts that allow you to get the solution faster, but they are not necessary for today's problem.
+1
+
+1 more reply
+a9sk
+•
+22h ago
+[LANGUAGE: Golang] [LANGUAGE: Go]
+
+https://github.com/a9sk/adventofcode/blob/main/year-2025/day-10/main.go
+
+HATED TODAY’S PART 2, go’s z3 package is not the best lol, did not really enjoy the api for that.
+1
+u/Wayoshi avatar
+Wayoshi
+•
+22h ago
+[LANGUAGE: CPython] paste
+
+After giving regular numpy a go, I did fall back to Z3 when realizing the standard solve didn't apply to most of the machines. The documentation is poor so frankly I cribbed off of some other answers here on how to set up an optimize problem (originally I used z3.Solver instead of z3.Optimize), but I did get the constraints correct before coming in here.
+
+As for part 1, that was cool and I am satisfied with what I got for a BFS in a very reduced state space. I thought squeezing in a linear algebra into this AoC with part 2 was also brilliant, but lament some that it was such complicated linear algebra to the point that it felt like Z3 or SciPy was hard required.
+def press_and_check_lights(machine, buttons):
+    lights = [False for l in machine['lights_goal']]
+    for l, c in Counter(itertools.chain.from_iterable(machine['buttons'][b] for b in buttons)).items():
+        if c % 2:
+            lights[l] = not lights[l]
+    return lights == machine['lights_goal']
+
+for machine in machines:
+    button_presses = 1
+    while all(
+        not press_and_check_lights(machine, buttons)
+        for buttons in itertools.combinations(range(len(machine['buttons'])), button_presses)
+    ):
+        button_presses += 1
+    part1 += button_presses
+1
+u/Jdup1n avatar
+Jdup1n
+•
+22h ago
+[Language: R]
+
+Github link
+
+For part 1, I use matrices and look at which matrix product uses the fewest columns to obtain the target value. Since the objective is binary, each column should only be used at most twice, which limits the number of possibilities to be estimated for large matrices.
+
+For part 2, I recognised the structure of a linear optimisation problem, as the "there's no such thing as 0.5 presses" in the statement had already tipped me off. So I kept my matrix form for my constraints and looked to minimise x1 + ... + xn, where n is the number of buttons and xnis the number of times the button must be pressed.
+1
+RussellDash332
+•
+23h ago
+[LANGUAGE: Python]
+
+Part 1 and 2, no imports
+
+Z3, scipy, pulp are cliche solutions so I decided to use none. BFS works for part 1, as for part 2, handmade simplex + branch-and-bound works fast enough. Again, no third-party libraries involved.
+
+I have yet to proofread against other inputs, but this at least worked for mine. For those willing to try, it takes stdin as the input.
+
+22
+u/mpyne avatar
+mpyne
+•
+4h ago
+I can't imagine what the intended solution was, but your solution worked great on my input as well, and was how I got that star, so thanks!
+1
+
+2 more replies
+IdiotaCompleto
+•
+5h ago
+Kudos for understanding what you wrote here, let alone actually writing it from scratch.
+1
+
+[deleted]
+•
+21h ago
+xelf
+•
+21h ago
+I rewrote your code a little and tested it (after submitting my own answer with scipy) and it's really darn fast. You've basically written your own MILP solver. Well done!
+
+I'm still thinking there must be another solution though, as while you didn't import an external library you essentially rewrote one, and I don't think that's the intended solution either. I guess I'll keep hacking away at it.
+6
+
+4 more replies
+ u/Ok-Bus4754 avatar
+Ok-Bus4754
+•
+23h ago
+i was afraid to go this way !
+did you benchmark your code ?
+1
+
+10 more replies
+Visual_Strike6706
+•
+23h ago
+[Language: C#]
+
+I had to use Z3. I'm sure you could do it without, but well I can't.
+Part 2 in terms of Performance is OKAY. Its under 2 Secound so I guess thats fine.
+
+https://github.com/spj2401Dev/AOC-25/blob/master/Day10/Program.cs
+1
+johnpeters42
+•
+23h ago
+[LANGUAGE: Python]
+
+Part 1
+
+Pressing the same button twice has the same effect on the lights as not pressing it at all, so each button is pressed either zero or one times. After wasting a bit of time mulling over rolling my own search logic, I found and used itertools.combinations().
+
+This has some list-to-string-to-list cruft left over because I initially thought memoization might be relevant.
+
+Part 2
+
+After determining that itertools.combinations_with_replacement() and recursion would both be way too slow, and going down a blind alley or two with numpy, I found and used SciPy milp to minimize
+
+x1 + x2 + x3 + ...
+
+(x1 = number of times the first button is pressed, etc., so this sum is the total number of button presses)
+
+given that
+
+(sum of buttons incrementing joltage #1) = (desired amount of joltage #1), etc.
+
+1
+u/VizjereiX avatar
+VizjereiX
+•
+22h ago
+You saved me! I was stuck with linalg solve, after already failing with itertools.
+Your comment showed me a nice tool, I did not used before, big THANKS!
+2
+u/morgoth1145 avatar
+morgoth1145
+•
+23h ago
+[Language: Python] code video Times: 00:15:00 / 01:49:17
+
+Both my times are bad today, I don't remember exactly why my part 1 time is so high. For part 2 I got stuck in a rabbit hole trying to make it work as a graph problem which just wasn't working out. (I blame the fact that I've been anticipating a graph problem for some time now...) I did optimize the graph search quite a bit and got a lot of lines to converge, but not everything. I even started running parallel instances to solve different parts of the input in an awful effort to get a solution even if it took forever.
+
+I eventually (well after an hour) remembered z3 to try which of course solved the problem super quickly. I already had suspicions that something in linear algebra would help and used some ideas from that to optimize the graph search) but the proper solution eludes me. Definitely an embarrassing showing from me...
+
+Edit: Minor cleanup
+
+Edit 2: In the morning I experimented with a different "path" in the graph search approach where I chose the most constrained joltage (the one with the fewest buttons that affect it) rather than the one that forced you to affect as many others as possible (all its buttons affect many joltages) and it's getting further than I got live, but still awfully slow. But it's fast enough that I might have (terribly) solved it without z3 had I thought of this live. (Still wish I thought of z3 earlier though.)
+1
+u/gadgetzombie avatar
+gadgetzombie
+•
+23h ago
+[LANGUAGE: Matlab] ~260ms
+
+Nice day for me being familiar with Matlabs intlinprog function and having written part 1 in a way that was easy to extend to part 2,
+
+input = readlines("input_2025_10.txt");
+n = numel(input);
+options = optimoptions("intlinprog", "Display", "none");
+pt1 = 0; pt2 = 0;
+for ii = 1:n
+    state = char(extractBetween(input(ii), "[", "]"))' == '#';
+    buttons = split(extractBetween(input(ii), "] ", " {"), " ");
+    numButtons = numel(buttons);
+    joltage = double(split(extractBetween(input(ii), "{", "}"), ","));
+
+    A = zeros(numel(state), numButtons);
+    for btn = 1:numButtons
+        ind = double(split(extractBetween(buttons(btn), "(", ")"), ","));
+        A(ind+1, btn) = 1;
+    end
+
+    combos = logcombs(numButtons, false, true);
+    results = mod(combos * A', 2); % xor
+    idx = find(all(results == state', 2), 1); % Find first match
+    pt1 = pt1 + nnz(combos(idx, :));
+
+    o = ones(numButtons, 1);
+    lb = zeros(numButtons, 1);
+    x = intlinprog(o, 1:numButtons, [], [], A, joltage, lb, [], options); % Solve
+    pt2 = pt2 + sum(x);
+end
+Where logcombs is a function I had previously written to generate a logical matrix of size 2m × m containing all m-length boolean combinations, optionally excluding the all false row and sorted on number of true elements in the row.
+
+2
+u/ednl avatar
+ednl
+•
+20h ago
+So the matrix from logcombs is all the m-bit numbers, sorted by number of 1s? Or: combinations(m,k) with k=0..m of the set of all powers of 2 (+0, optionally), is that how your function builds it?
+2
+
+3 more replies
+Neuro_J
+•
+23h ago
+This is my first time learning about integer linear programming! I solved part I using BFS but couldn't get part II working because the state space is just too big to explore. I asked chatGPT and intlinprog was exactly what it suggested to me! I feel like the LLM is just getting exponentially better over time.
+2
+u/Ok-Bus4754 avatar
+Ok-Bus4754
+•
+23h ago
+of course, today is made for languages like matlab !
+alawys trying to make my solution native without using any external libs with python or rust, no way i could have done that today !
+
+good job
+2
+
+2 more replies
+ u/welguisz avatar
+welguisz
+•
+23h ago
+[LANGUAGE: Java]
+
+https://github.com/welguisz/advent-of-code/blob/main/src/com/dwelguisz/year2025/Factory.java
+
+Part 1: Standard BFS
+
+Part 2: Z3 Solver for Java. First time using Z3 in Java. Good learning experience. Now I am thinking if using my Matrix class to solve would be doable.
+
+1
+u/welguisz avatar
+welguisz
+•
+23h ago
+For those that need the library dependency for Z3:
+
+<dependency> <groupId>tools.aqua</groupId> <artifactId>z3-turnkey</artifactId> <version>LATEST\_VERSION</version> </dependency>
+2
+u/vanveenfromardis avatar
+vanveenfromardis
+•
+1d ago
+[LANGUAGE: C#]
+
+GitHub
+
+I immediately knew this was an ILP problem when I read part 2, and spent a bunch of time trying to do it by hand. I tried using A* with aggressing pruning, a greedy algorithm (which in the end got very close, was off by ~1%), and beam search, but some of the machines just had too big of a search space for naive algorithms.
+
+Even with a UInt128 state encoding (each indicator got 9 bits, as my highest target was ~300 Jolts), mapping each button press to a fixed addend, and aggressive pruning the A* was woefully intractable.
+
+Ended up caving and using Z3, which obviously this puzzle is extremely trivial in. I have a strong feeling that a greedy algorithm to generate seed states, then a probabilistic meta-heuristic approach like Simulated Annealing would work here. I'll likely try it tomorrow.
+
+3
+Visual_Strike6706
+•
+23h ago
+Yea I tried without the Z3 lib at first too, but yea also failed lol. For me it was like 30 off. So yea about that 1 %
+1
+mctrafik
+•
+1d ago
+[language: typescript]
+
+Brute forced P1 in 30ms (part do in Z3... omitted since I'm not proud of it):
+
+let answer1 = 0;
+const parsed = input.split(`\n`);
+const parser = /\[(?<init>[.#]+)\](?<buttons>( \([0-9,]+\))+) {(?<joltage>[0-9,]+)}/;
+for (const line of parsed) {
+  const match = parser.exec(line);
+  if (!match || !match.groups) throw new Error("fuck" + line)
+
+  const { init: initS, buttons: buttonsS } = { ...match.groups };
+  const init = parseInt(reverseString(initS).replaceAll('.', '0').replaceAll('#', '1'), 2);
+  const buttons = buttonsS.replaceAll('(', '').replaceAll(')', '').split(' ').filter(Boolean).map(s => {
+    let button = 0;
+    for (const n of s.split(',').map(c => Number(c))) {
+      button |= 1 << n;
+    }
+    return button;
+  });
+  let smallest = 1e6;
+  for (let permutation = 1; permutation <= (1 << buttons.length); permutation++) {
+    const filteredButtons = buttons.filter((button, index) => {
+      const mask = ((1 << index) & permutation);
+      return !!mask
+    });
+    let attempt = 0
+    for (const button of filteredButtons) {
+      attempt ^= button;
+    }
+    if (attempt === init) {
+      smallest = Math.min(filteredButtons.length, smallest);
+    }
+  }
+  answer1 += smallest;
+}
+I tried really hard to do A* for P2, and it slayed some of the rows, but struggled on others. Probably my heiuristic was poop. Can someone recommend a good one?
+
+1
+u/vanveenfromardis avatar
+vanveenfromardis
+•
+23h ago
+I also spent a long time on A*, but then I looked more closely at some of the target joltages. Some machines had 10 indicators, multiple of which required a joltage of well over 200.
+
+The search space is simply astronomical. I do not think you are going to get a tractable vanilla A* implementation, even with aggressive pruning.
+
+I was able to get very close to the correct answer with a greedy algorithm with backtracking, so I'm sure it's possible to make that work with a reasonable run time.
+1
+u/Ok-Bus4754 avatar
+Ok-Bus4754
+•
+1d ago
+[Language: Python]
+
+The Day of Linear Algebra!
+
+Part 1: Fairly straightforward. I treated the goal as a numeric state and used BFS to find the minimum number of button presses (transitions) required to reach it.
+
+Part 2: This is where things got interesting! I formulated the problem as a linear system: I mapped each goal counter to a linear equation where the variable is the number of times a button is pressed, based on whether that button's bitmask contributes to that counter.
+
+Initially, I thought Ax = b would solve everything, but the input contained tricky edge cases:
+
+Non-square matrices.
+Square matrices that were surprisingly Rank Deficient (e.g., Rank 8 for a 9x9 system), meaning they had infinite solutions and a standard solver would fail to find the minimal one.
+My final solution is a Hybrid approach:
+
+Fast Path: Use standard Linear Algebra (numpy.linalg.lstsq) if the system is Square and Full Rank.
+Fallback: Use an Integer Linear Programming optimizer (scipy.optimize.linprog) for everything else to correctly handle infinite solution spaces.
+Performance:
+
+Part 1: 11 ms
+Part 2: 100 ms (Hybrid approach gave ~40% speed up)
+https://github.com/Fadi88/AoC/blob/master/2025/days/day10/solution.py
+2
+jhandros
+•
+1d ago
+[Language: Pyhon]
+from scipy.optimize import linprog
+from collections import deque
+
+T=[({i for i,x in enumerate(t[1:-1])if x=='#'},
+    [set(map(int,b[1:-1].split(',')))for b in bs],
+    tuple(map(int,c[1:-1].split(','))))
+   for t,*bs,c in(map(str.split,open('day10.txt')))]
+
+def s1
+(g,m)
+:
+    q,seen=deque([(frozenset(),0)]),{frozenset()}
+    while q:
+        cur,s=q.popleft()
+        if cur==g:return s
+        for x in m:
+            n=cur^x;f=frozenset(n)
+            if f not in seen:seen.add(f);q.append((n,s+1))
+
+print(sum(s1(g,m)for g,m,_ in T))
+
+def s2
+(g,m)
+:
+    return linprog([1]*len(m),
+        A_eq=[[i in x for x in m]for i in range(len(g))],
+        b_eq=g,integrality=True).fun
+
+print(sum(s2(c,m)for _,m,c in T))
+
+2
+u/daggerdragon avatar
+daggerdragon
+MOD
+•
+9h ago
+[Language: Pyhon]
+Please edit your language tag to spell "Python" correctly so that folks who are CTRL-F'ing for Python solutions will find this one.
+1
+PhysPhD
+•
+21h ago
+Using linprog was a stroke of genius.
+2
+Boojum
+•
+1d ago
+[LANGUAGE: Python] 00:18:12 / 00:44:10
+
+Super ugly today. For Part 1, I converted everything from binary to integers, then exhaustively tested all combinations to see if the xored to the correct value.
+
+For Part 2... Z3. I'm not proud of this one, but it does work. Whenever I do a solve with Z3, I always like to go back later and try to figure out a solution without it. Maybe I'll do that for this one.
+import fileinput, itertools, functools, operator, z3
+
+t1, t2 = 0, 0
+for l in fileinput.input():
+    dd, *bb, cc = l.split()
+    bb = [ [ int( c ) for c in b[ 1 : -1 ].split( ',' ) ] for b in bb ]
+
+    dd = int( dd[ -2 : 0 : -1 ].translate( str.maketrans( ".#", "01" ) ), 2 )
+    ff = [ sum( 1 << c for c in b ) for b in bb ]
+    def count():
+        for n in range( len( ff ) + 1 ):
+            for c in itertools.combinations( ff, n ):
+                if functools.reduce( operator.ixor, c, 0 ) == dd:
+                    return n
+    t1 += count()
+
+    cc = [ int( c ) for c in cc[ 1 : -1 ].split( ',' ) ]
+    pp = [ z3.Int( f"p{i}" ) for i in range( len( bb ) ) ]
+    o = z3.Optimize()
+    o.add( [ z3.Sum( [ pp[ i ] for i, b in enumerate( bb ) if j in b ] ) == c
+             for j, c in enumerate( cc ) ] )
+    o.add( [ p >= 0 for p in pp ] )
+    o.minimize( z3.Sum( pp ) )
+    o.check()
+    m = o.model()
+    t2 += sum( m[ v ].as_long() for v in pp )
+
+print( t1, t2 )
+2
+u/sim642 avatar
+sim642
+•
+1d ago
+[LANGUAGE: Scala]
+
+On GitHub.
+
+In part 1 I did a BFS from the state of all lights off to the desired state with the button presses being edges. It did the job quickly, although it's not the most efficient because it explores different permutations of pressing the same buttons, which doesn't actually matter. I realized already that it's a linear system of equations over the boolean field (with addition being xor), together with the minimization of the variable (whether a button is pressed or not, multiple times is useless) sum. But for quick solving I didn't bother with being more clever.
+
+I expected part 2 to just use the joltages as weights, so I could switch from BFS to Dijkstra, but of course not! So in part 2 I ended up using Z3 to solve the equation system while minimizing the sum of button press counts (over integers, not booleans now). These Z3 solutions always feel a bit unsatisfactory but it is an integer linear programming (ILP) problem, which is NP-complete, so there might not even be a neat solution.
+3
+Szeweq
+•
+1d ago
+[LANGUAGE: Rust]
+
+I have technically completed it but I am still trying to optimize it. I have ran the release profile, it is sluggish.
+
+https://github.com/szeweq/aoc2025/blob/main/day10/src/main.rs
+
+5
+u/sim642 avatar
+sim642
+•
+1d ago
+It's nice that someone actually bothered to do Gaussian elimination to somewhat solve the equations themselves. Too bad the optimization part is still annoying.
+0
+pvillano
+•
+1d ago
+[LANGUAGE: Python]
+
+github
+
+generations of m*n xors with a "seen" set for part 1
+
+scipy.optimize.linprog for part 2
+2
+u/ChrisMan174 avatar
+ChrisMan174
+•
+1d ago
+[LANGUAGE: Python]
+
+Part 1 | Part 2
+
+Did Part 1 using BFS, optimized by using a bitmask so that you could just XOR bidirectionally across edges.
+
+For Part 2 I thought I could be cheeky and just turn the counter states into a prime number mask (2count[0] * 3count[1] * ...), ran it on the first case and immediately realized that it would never work in a reasonable amount of time. Instead I just fell back to my beloved Z3 for this year's system of equations.
+1
+u/seligman99 avatar
+seligman99
+•
+1d ago
+[LANGUAGE: Python]
+
+github
+
+I wrote the solver in some horrid cobbled together python. It's slow, but it works. I'm sure if I just used a solver like a normal person, it'd be 100 times faster. No doubt this is proof I just couldn't see the clever way to do this and got lost in doing it the way I know how. Be interesting to see if I can come up with a better solution now.
+2
+u/SuperSmurfen avatar
+SuperSmurfen
+•
+1d ago
+[LANGUAGE: Rust]
+
+Times: 00:12:43 00:23:06
+
+Link to full solution
+
+Almost feels like I cheated here. I identified part 2 as the integer programming problem. We know this is NP-hard so solving this efficiently is impossible in general. You have to do some kind of optimization solver.
+
+I quickly found a rust solver good_lp which I used to solve it. In retrospect I should have probably just used Z3.
+
+Essentially you just model the problem and the solver does the rest:
+
+let mut vars = variables!();
+let press_vars = (0..buttons.len())
+    .map(|_| vars.add(variable().min(0).integer()))
+    .collect::<Vec<_>>();
+
+let mut problem = highs(vars.minimise(press_vars.iter().sum::<Expression>()));
+let mut exprs = vec![0.into_expression(); jolts.len()];
+for i in 0..buttons.len() {
+    for &x in &buttons[i] {
+        exprs[x] += press_vars[i];
+    }
+}
+for (e, &j) in exprs.into_iter().zip(jolts) {
+    problem.add_constraint(e.eq(j as f64));
+}
+let sol = problem.solve().unwrap();
+press_vars.iter().map(|&v| sol.value(v)).sum::<f64>() as _
+For part 1 I did a BFS.
+2
+u/4HbQ avatar
+4HbQ
+•
+1d ago
+[LANGUAGE: Python] 16 lines.
+
+For part 1, we make use of the fact that every button only needs to be pressed (at most) once. Pressing it twice results in the same state as not pressing at all. So, we can simply try each subset of the buttons, starting with a single button, then each combination of two buttons, etc. Once we find a set of buttons that produces the desired state, we can stop:
+
+for n in numbers:
+    for pressed in combinations(buttons, n):
+        lights = [sum(i in p for p in pressed)%2 for i in numbers]
+        if lights == diagram: return n
+For part 2, I tried to reduce the puzzle to an existing (computational) problem, but could not think of any. I also experimented with local search algorithms. This worked great on the sample inputs, but got stuck in local optima on the actual input.
+
+So in the end, I formulated it as a linear program and used scipy.optimize.linprog to do the heavy lifting. Not a very satisfying solution, so if anyone succeeds using local search: please let me know!
+8
+u/alexbaguette1 avatar
+alexbaguette1
+•
+1d ago
+[LANGUAGE: Python]
+
+BFS for part 1, LP for part 2
+
+P1
+P2
+3
+ricbit
+•
+1d ago
+[LANGUAGE: Python]
+
+Part 1 is a standard BFS. Part 2 have a quite small MIP formulation, make each button an integer variable, make the sum of the buttons equal to the joltage levels, minimize. Here's the mip core:
+
+  def search(self):
+    m = mip.Model(sense=mip.MINIMIZE)
+    m.verbose = 1
+    button = [
+      m.add_var(var_type=mip.INTEGER, name=f"b{i}")
+      for i in range(len(self.buttons))]
+    for i in range(len(self.goal)):
+      m += mip.xsum(
+        button[b] for b in range(len(button))
+        if i in self.buttons[b]) == self.goal[i]
+    m.objective = mip.minimize(mip.xsum(button))
+    m.optimize()
+    return int(m.objective_value)
+Solution part 1
+
+Solution part 2
+
+Rewrite, both parts under 1s
+
+1
+u/daggerdragon avatar
+daggerdragon
+MOD
+•
+9h ago
+Here's the mip core:
+Top-level comments in Solution Megathreads are for code solutions.
+
+Please edit your comment to share your full code/repo/solution, not just "the interesting bit". edit: 👍
+1
+
+1 more reply
+ u/Nathanfenner avatar
+Nathanfenner
+•
+1d ago
+[LANGUAGE: TypeScript]
+
+github
+
+I used BFS for Part 1, and branch-and-bound heuristic to solve Part 2. The pruning/heuristic was tricky and took me a while to figure out, and it's still not very fast.
+
+If there's an "imbalance" in the target, and no button satisfies the imbalance (e.g. delta[5] > delta[4] but there's no button that has 5 but not 4) then it is impossible
+And if there's exactly one button in the above case, you must press it immediately
+I bet with a few other smart heuristics I could make it run even faster.
+
+8
+car4889
+•
+15h ago
+Not a pruning heuristic, but I found pre-sorting the buttons from shortest to longest provides a modest boost to this method as well.
+
+EDIT: Apologies. I had that backward. Longest to shortest helps speed this up a bit.
+1
+zanomate
+•
+18h ago
+Taken by frustration, I tried running your code against my input and I can’t get past line 91 😂
+1
+
+1 more reply
+jonathan_paulson
+•
+1d ago
+[LANGUAGE: Python]. My times: 00:04:56 / 00:21:01. Video of me solving.
+
+Another tough one! I used brute force for part 1. Z3 for part 2. Z3 is a "SAT solver" library. I'm not sure how to do part2 "by hand"; it's not too bad to solve Ax=B but how do you minimize sum(x)?
+
+4
+u/pred avatar
+pred
+•
+1d ago
+it's not too bad to solve Ax=B but how do you minimize sum(x)
+Yeah, there's a collection of interesting problems here.
+
+In part 1, we're solving 𝐴𝑥 = 𝑏 over 𝔽₂ and want 𝑥 with minimal Hamming weight. That's syndrome decoding.
+
+In part 2, we're 𝐴𝑥 = 𝑏 with the requirement that 𝑥ᵢ ∈ ℕ. That's the jump to integer linear programming.
+
+Another interesting one is sparse regression/sparse approximation/sparse representation/compressed sensing/signal reconstruction. There, we want to minimize the 𝐿² norm of 𝐴𝑥 − 𝑏 over ℝ (which is generally easy) with the additional requirement that 𝑥 has at most 𝑘 non-zeros (which makes it hard).
+4
+Noble_Mushtak
+•
+1d ago
+To minimize sum(x), first find the free variables in the system Ax=B. Then, because of how the system is set up, you know that the maximum value of any free variable is at most the maximum joltage, because incrementing any variable contributes at least 1 to the joltage of some machine. Then, since each system has at most 3 free variables and maximum joltage is at most 250, you can just loop through all possible of free variables and take the one which minimizes sum(x): https://github.com/Noble-Mushtak/Advent-of-Code/blob/main/2025/day10/solution2.py
+
+This solution is kind of slow though, takes around 31 seconds for my puzzle input.
+9
+u/anna__throwaway avatar
+anna__throwaway
+•
+1d ago
+hey man my buddies and I have been following with your solve videos every day, we really like your work. we were waiting for your day 9 solve, what happened?
+4
+
+2 more replies
+ u/Mysterious_Remote584 avatar
+Mysterious_Remote584
+•
+1d ago
+This isn't quite "solving Ax=b" because the system is underdetermined.
+
+You're looking for "Integer linear programming" - algorithms for which include simplex and ellipsoid.
+
+https://en.wikipedia.org/wiki/Linear_programming#Algorithms
+5
+u/pred avatar
+pred
+•
+1d ago
+[LANGUAGE: Python] GitHub/Codeberg.
+
+Part 1 is the syndrome decoding problem: The target state is the syndrome, and the set of moves defines the parity-check matrix. Part 2 is an integer version.
+
+Originally solved part 1 with BFS, part 2 with integer linear programming (ILP). There are lots of good ILP libraries out there, but the problem is simple enough that the low-level matrix building approach for scipy.optimize.linprog (using HiGHS under the hood) is sufficient for a straightforward solution (below).
+
+Incidentally, I recently spent some time on investigating how useful the integer linear programming solver HiGHS is for syndrome decoding, i.e. using ILP to solve part 1. It's completely possible by adding auxiliary variables to represent parity, i.e. replacing the binary linear equation 𝐴𝑥 = 𝑏 with an integral linear equation 𝐴𝑥 − 2𝑡 = 𝑏, but I have yet to find a family of instances where bidirectional BFS doesn't just always win. Nevertheless, here's a solution that handles both parts as ILPs:
+def solve(goal, moves, part1=True):
+    n, m = len(moves), len(goal)
+    c = [1] * n
+    A_eq = [[i in move for move in moves] for i in range(m)]
+    bounds = [(0, None)] * n
+    if part1:
+        c += [0] * m
+        A_eq = np.hstack([A_eq, -2 * np.eye(m)])
+        bounds += [(None, None)] * m
+    return linprog(c, A_eq=A_eq, b_eq=goal, bounds=bounds, integrality=True).fun
+
+
+print(sum(solve(goal, moves, True) for goal, moves, _ in tasks))  # Part 1
+print(sum(solve(goal, moves, False) for _, moves, goal in tasks))  # Part 2
+
+3
+u/4HbQ avatar
+4HbQ
+•
+1d ago
+In my book, solving part 1 using the part 2 approach is always a win!
+4
+
+4 more replies
+hugh_tc
+•
+1d ago
+[LANGUAGE: Python 3]
+
+z3 to the rescue. I'm sure there's clean "math solution", though.
+
+paste, cleaned up
+
+3
+u/Mysterious_Remote584 avatar
+Mysterious_Remote584
+•
+1d ago
+There's one of these annoying equation solvers every year. I find the Haskell z3 library to be painful so I just cheat and pick another language or spend too much time analyzing the precise setup.
+
+Kind of wish these were done away with.
+
+15
+u/ultimathulesoc avatar
+ultimathulesoc
+•
+16h ago
+yeah not happy with today. next time one of these pops up i'll just quit the year. nothing last year seemed intended for z3.
+0
+u/ItchyTrack_ avatar
+ItchyTrack_
+•
+1d ago
+Yea same
+5
+hugh_tc
+•
+1d ago
+Yeah, it's not exactly satisfying when the fast solution is: "pass to a library made by people 1,000 smarter than me". But there's usually only one or two per year though, so I think it's acceptable.
+
+I should probably use this as an excuse to review some ILP algorithms. It has been a while.
+8
