@@ -2,7 +2,7 @@
 Tests for Day 11: Reactor
 """
 import unittest
-from reactor import parse_input, find_all_paths, part1
+from reactor import parse_input, find_all_paths, part1, find_paths_with_required_nodes, part2
 
 class TestParseInput(unittest.TestCase):
     """Test input parsing functionality."""
@@ -120,16 +120,61 @@ class TestFindAllPaths(unittest.TestCase):
         
         self.assertEqual(paths, expected)
 
-class TestExampleInput(unittest.TestCase):
-    """Test with the example input file."""
+class TestRequiredNodePaths(unittest.TestCase):
+    """Test path finding with required nodes."""
     
-    def test_example_file(self):
-        """Test that example file produces expected result."""
+    def test_paths_with_required_nodes(self):
+        """Test finding paths that visit specific required nodes."""
+        graph = {
+            "start": ["a", "b"],
+            "a": ["req1"],
+            "b": ["req2"],
+            "req1": ["c"],
+            "req2": ["c"],
+            "c": ["end"]
+        }
+        
+        # Should find no paths since no single path visits both req1 and req2
+        paths = find_paths_with_required_nodes(graph, "start", "end", ["req1", "req2"])
+        self.assertEqual(len(paths), 0)
+        
+        # Should find paths that visit req1
+        paths = find_paths_with_required_nodes(graph, "start", "end", ["req1"])
+        self.assertEqual(len(paths), 1)
+        self.assertIn("req1", paths[0])
+    
+    def test_paths_with_both_required_nodes(self):
+        """Test finding paths that visit both required nodes."""
+        graph = {
+            "start": ["a"],
+            "a": ["req1"],
+            "req1": ["req2"],
+            "req2": ["end"]
+        }
+        
+        paths = find_paths_with_required_nodes(graph, "start", "end", ["req1", "req2"])
+        self.assertEqual(len(paths), 1)
+        self.assertIn("req1", paths[0])
+        self.assertIn("req2", paths[0])
+
+class TestExampleInput(unittest.TestCase):
+    """Test with the example input files."""
+    
+    def test_example_file_part1(self):
+        """Test that example file produces expected result for part 1."""
         try:
-            result = part1(parse_input("example.txt"))
+            result = part1(parse_input("2025/day11/example.txt"))
             self.assertEqual(result, 5)
         except FileNotFoundError:
             self.skipTest("example.txt not found")
+    
+    def test_example_file_part2(self):
+        """Test that example2 file produces expected result for part 2."""
+        try:
+            result = part2(parse_input("2025/day11/example2.txt"))
+            self.assertEqual(result, 2)
+        except FileNotFoundError:
+            self.skipTest("example2.txt not found")
 
 if __name__ == "__main__":
     unittest.main()
