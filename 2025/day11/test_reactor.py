@@ -2,7 +2,7 @@
 Tests for Day 11: Reactor
 """
 import unittest
-from reactor import parse_input, find_all_paths, part1, find_paths_with_required_nodes, part2
+from reactor import parse_input, find_all_paths, part1, count_paths_with_required_nodes, part2
 
 class TestParseInput(unittest.TestCase):
     """Test input parsing functionality."""
@@ -135,13 +135,12 @@ class TestRequiredNodePaths(unittest.TestCase):
         }
         
         # Should find no paths since no single path visits both req1 and req2
-        paths = find_paths_with_required_nodes(graph, "start", "end", ["req1", "req2"])
-        self.assertEqual(len(paths), 0)
+        count = count_paths_with_required_nodes(graph, "start", "end", ["req1", "req2"])
+        self.assertEqual(count, 0)
         
         # Should find paths that visit req1
-        paths = find_paths_with_required_nodes(graph, "start", "end", ["req1"])
-        self.assertEqual(len(paths), 1)
-        self.assertIn("req1", paths[0])
+        count = count_paths_with_required_nodes(graph, "start", "end", ["req1"])
+        self.assertEqual(count, 1)
     
     def test_paths_with_both_required_nodes(self):
         """Test finding paths that visit both required nodes."""
@@ -152,10 +151,8 @@ class TestRequiredNodePaths(unittest.TestCase):
             "req2": ["end"]
         }
         
-        paths = find_paths_with_required_nodes(graph, "start", "end", ["req1", "req2"])
-        self.assertEqual(len(paths), 1)
-        self.assertIn("req1", paths[0])
-        self.assertIn("req2", paths[0])
+        count = count_paths_with_required_nodes(graph, "start", "end", ["req1", "req2"])
+        self.assertEqual(count, 1)
 
 class TestExampleInput(unittest.TestCase):
     """Test with the example input files."""

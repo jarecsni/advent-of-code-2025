@@ -1,10 +1,15 @@
 # Day 5: Cafeteria
 
-## Part One
+## Problem Summary
 
-The cafeteria's new inventory management system tracks ingredient freshness using ID ranges. Given a list of fresh ingredient ID ranges and a list of available ingredient IDs, determine how many available ingredients are fresh.
+The cafeteria's inventory system tracks ingredient freshness using ID ranges. Determine which available ingredients are fresh based on given ranges.
 
-Fresh ID ranges are inclusive and can overlap. An ingredient ID is fresh if it falls within any range.
+## Part 1: Fresh Ingredient Count
+
+Given fresh ingredient ID ranges and available ingredient IDs, count how many available ingredients are fresh.
+
+- Ranges are inclusive and can overlap
+- An ingredient is fresh if it falls within any range
 
 ### Example
 
@@ -14,28 +19,41 @@ Fresh ID ranges are inclusive and can overlap. An ingredient ID is fresh if it f
 1 5 8 11 17 32
 ```
 
+Analysis:
 - ID 1: spoiled (not in any range)
 - ID 5: fresh (in range 3-5)
-- ID 8: spoiled
+- ID 8: spoiled (not in any range)
 - ID 11: fresh (in range 10-14)
 - ID 17: fresh (in ranges 16-20 and 12-18)
-- ID 32: spoiled
+- ID 32: spoiled (not in any range)
 
-Expected output: `3` fresh ingredients
+Result: **3 fresh ingredients**
 
-## Part Two
+## Part 2: TBD
 
-[Part two description will go here]
+[Part 2 will be added when available]
 
-## Solution
+## Algorithm
 
-Run with:
-```
-python day05/cafeteria.py day05/example.txt
-python day05/cafeteria.py day05/input.txt
+1. Parse fresh ID ranges from first line
+2. Parse available ingredient IDs from second line
+3. For each available ID, check if it falls within any fresh range
+4. Count matches
+
+## Key Insights
+
+- Range intersection problem
+- Overlapping ranges don't affect the result
+- Simple linear scan is sufficient for reasonable input sizes
+
+## Usage
+
+```bash
+python cafeteria.py example.txt
+python cafeteria.py input.txt
 ```
 
 Run tests:
-```
-python -m pytest day05/test_cafeteria.py -v
+```bash
+python -m pytest test_cafeteria.py -v
 ```

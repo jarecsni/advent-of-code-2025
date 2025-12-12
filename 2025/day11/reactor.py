@@ -74,57 +74,72 @@ def part1(data, debug=False):
     
     return len(paths)
 
-def find_paths_with_required_nodes(graph, start, end, required_nodes, path=None, debug=False, max_paths=None):
-    """Find all paths from start to end that visit all required nodes."""
-    if path is None:
-        path = []
+def count_paths_with_required_nodes(graph, start, end, required_nodes, visited=None, required_visited=None, memo=None, debug=False, progress_tracker=None):
+    """Count paths from start to end that visit all required nodes using memoization."""
+    if visited is None:
+        visited = set()
+    if required_visited is None:
+        required_visited = set()
+    if memo is None:
+        memo = {}
+    if progress_tracker is None:
+        progress_tracker = {'processed': 0, 'last_report': 0}
     
-    path = path + [start]
+    # Create a state key for memoization
+    state_key = (start, frozenset(visited), frozenset(required_visited))
+    if state_key in memo:
+        return memo[state_key]
     
-    # Early termination if path is getting too long (likely indicates cycles or inefficient graph)
-    if len(path) > 50:
-        if debug:
-            print(f"  Path too long, terminating: {' -> '.join(path[:5])}...{' -> '.join(path[-5:])}")
-        return []
+    # Progress tracking
+    progress_tracker['processed'] += 1
+    if progress_tracker['processed'] % 1000 == 0 or progress_tracker['processed'] - progress_tracker['last_report'] >= 1000:
+        # Estimate progress based on memo size and complexity
+        memo_size = len(memo)
+        estimated_total = max(10000, memo_size * 2)  # Rough estimate
+        progress_pct = min(99, (memo_size * 100) // estimated_total)
+        print(f"Progress: {progress_pct}% ({memo_size} states explored, {progress_tracker['processed']} nodes processed)")
+        progress_tracker['last_report'] = progress_tracker['processed']
     
-    if debug:
-        print(f"  Exploring: {' -> '.join(path)}")
+    # Add current node to visited set
+    new_visited = visited | {start}
+    new_required_visited = required_visited.copy()
+    if start in required_nodes:
+        new_required_visited.add(start)
+    
+    if debug and len(new_visited) <= 10:  # Only debug for short paths
+        print(f"  At {start}, visited: {sorted(new_visited)}, required: {sorted(new_required_visited)}")
     
     # If we reached the end, check if we visited all required nodes
     if start == end:
-        visited_required = set(required_nodes) & set(path)
-        if len(visited_required) == len(required_nodes):
+        if len(new_required_visited) == len(required_nodes):
             if debug:
-                print(f"  Found valid path: {' -> '.join(path)} (visits {visited_required})")
-            return [path]
+                print(f"  Found valid path ending at {start}")
+            memo[state_key] = 1
+            return 1
         else:
-            if debug:
-                missing = set(required_nodes) - visited_required
-                print(f"  Path reaches end but missing: {missing}")
-            return []
+            memo[state_key] = 0
+            return 0
     
     # If this device has no outputs, dead end
     if start not in graph:
-        if debug:
-            print(f"  Dead end at {start}")
-        return []
+        memo[state_key] = 0
+        return 0
     
-    paths = []
+    # Early termination if path is getting too long
+    if len(new_visited) > 50:
+        memo[state_key] = 0
+        return 0
+    
+    total_paths = 0
     for next_device in graph[start]:
-        # Avoid cycles by not revisiting nodes in current path
-        if next_device not in path:
-            new_paths = find_paths_with_required_nodes(graph, next_device, end, required_nodes, path, debug, max_paths)
-            paths.extend(new_paths)
-            
-            # Early termination if we've found enough paths
-            if max_paths and len(paths) >= max_paths:
-                if debug:
-                    print(f"  Reached max paths limit ({max_paths}), stopping search")
-                break
-        elif debug:
-            print(f"  Skipping {next_device} (already in path)")
+        # Avoid cycles by not revisiting nodes
+        if next_device not in new_visited:
+            paths = count_paths_with_required_nodes(graph, next_device, end, required_nodes, 
+                                                  new_visited, new_required_visited, memo, debug, progress_tracker)
+            total_paths += paths
     
-    return paths
+    memo[state_key] = total_paths
+    return total_paths
 
 def part2(data, debug=False):
     """Solve part 2: count paths from 'svr' to 'out' that visit both 'dac' and 'fft'."""
@@ -136,25 +151,12 @@ def part2(data, debug=False):
     
     required_nodes = ['dac', 'fft']
     
-    # For large inputs, we might need to limit the search
-    # Try with a reasonable limit first
-    print("Searching for paths (this may take a while for large inputs)...")
-    max_search_paths = 100000  # Reasonable limit to prevent infinite search
-    paths = find_paths_with_required_nodes(data, 'svr', 'out', required_nodes, debug=debug, max_paths=max_search_paths)
+    print("Counting paths with memoization...")
+    count = count_paths_with_required_nodes(data, 'svr', 'out', required_nodes, debug=debug)
     
-    if debug or len(paths) <= 20:  # Show paths if debugging or reasonable number
-        print(f"Found {len(paths)} paths from 'svr' to 'out' that visit both 'dac' and 'fft':")
-        for i, path in enumerate(paths, 1):
-            # Highlight the required nodes in the path
-            path_str = ' -> '.join(path)
-            for node in required_nodes:
-                if node in path:
-                    path_str = path_str.replace(node, f"[{node}]")
-            print(f"  Path {i}: {path_str}")
-    else:
-        print(f"Found {len(paths)} paths from 'svr' to 'out' that visit both 'dac' and 'fft' (too many to display)")
+    print(f"Found {count} paths from 'svr' to 'out' that visit both 'dac' and 'fft'")
     
-    return len(paths)
+    return count
 
 def main():
     parser = argparse.ArgumentParser(description="Day 11: Reactor - Find all paths through electrical device network")

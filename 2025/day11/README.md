@@ -51,10 +51,24 @@ Of all the paths from "svr" to "out", only 2 visit both "dac" and "fft":
 
 ## Approach
 
+### Original Solution (reactor.py)
 1. Parse the input to build a directed graph (adjacency list)
 2. Use DFS to find all paths from start to end
-3. For part 2, filter paths that visit all required nodes
+3. For part 2, use memoized DFS tracking visited required nodes
 
-## Solution
+**Performance**: Works for examples but too slow for large inputs in Part 2.
 
-- Part 1 & 2: [reactor.py](reactor.py)
+### Optimized Solution (reactor_optimized.py)
+1. Parse the input to build a directed graph
+2. For Part 1: Simple memoized path counting
+3. For Part 2: Key insight - split into segments and multiply counts
+   - Count paths: svr → fft → dac → out
+   - Since the graph is a DAG, only one direction (fft→dac or dac→fft) exists
+   - Multiply segment counts: (svr→fft) × (fft→dac) × (dac→out)
+
+**Performance**: Runs in milliseconds for both parts.
+
+## Solutions
+
+- Original: [reactor.py](reactor.py) 
+- Optimized: [reactor_optimized.py](reactor_optimized.py)
